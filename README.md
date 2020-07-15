@@ -10,7 +10,6 @@ This repo contains Bogdan Ciobanu's portfolio and STEP projects.
 - Walkthroughs for building a similar app
 
 ## How to use
-
-    Run the shell command `mvn package appengine:run` from the portfolio
-directory or `./preview.sh` from the project's root. The webpage will be
+Run the command ```mvn package appengine:run``` from the portfolio
+directory or ```./preview.sh``` from the project's root. The webpage will be
 then accessible on localhost:8080.
