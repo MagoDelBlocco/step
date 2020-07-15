@@ -26,3 +26,7 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function navtoggle() {
+  document.getElementById("navmenu").classList.toggle("visible");
+}
