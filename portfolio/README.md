@@ -1,8 +1,2 @@
-This directory is where you'll write all of your code!
-
-By default it contains a barebones web app. To run a local server, execute this
-command:
-
-```bash
-mvn package appengine:run
-```
+## How to build
+Run the command ```bash ./preview.sh``` from the root directory of the project.
