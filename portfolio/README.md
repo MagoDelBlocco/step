@@ -1,8 +1,9 @@
-This directory is where you'll write all of your code!
+This directory and subdirectories contain the source code of the web app.
 
-By default it contains a barebones web app. To run a local server, execute this
-command:
-
+### How to build
 ```bash
 mvn package appengine:run
 ```
+
+### How to access page
+Connect to localhost:8080
