@@ -6,12 +6,26 @@
     <link rel="stylesheet" href="../style.css">
     <script src="../script.js"></script>
   </head>
+
+  <!-- TODO: find a good page design for this page -->
   <body>
     <div id="content">
-      <h1>This is test 2</h1>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <p>Here will be the navbar</p>
+      <h1>Personal Projects</h1>
+      <p>This page contains all the projects that I was involved in:</p>
+
+      <button class="collapsible" onclick="expand_collapsible(this)">First Project</button>
+      <div class="collapsible-content">
+        <p>Placeholder 1</p>
+      </div>
+      <button class="collapsible" onclick="expand_collapsible(this)">Second Project</button>
+      <div class="collapsible-content">
+        <p>Placeholder 2</p>
+      </div>
+      <button class="collapsible" onclick="expand_collapsible(this)">Third Project</button>
+      <div class="collapsible-content">
+        <p>Placeholder 3</p>
+      </div>
     </div>
   </body>
 </html>
