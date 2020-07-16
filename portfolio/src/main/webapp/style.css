@@ -8,6 +8,10 @@
   margin-top: 20px;
 }
 
+#gallerycontent {
+  
+}
+
 .galleryrow {
     display: flex;
     flex-wrap: wrap;
