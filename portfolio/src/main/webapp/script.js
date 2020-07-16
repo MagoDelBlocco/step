@@ -28,5 +28,5 @@ function addRandomGreeting() {
 }
 
 function navtoggle() {
-  document.getElementById("navmenu").classList.toggle("visible");
+  document.getElementById('navmenu').classList.toggle('visible');
 }
