@@ -1,31 +1,26 @@
+.centered-text  {
+  text-align: center;
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
 }
 
-#greeting-container {
-  margin-top: 20px;
-}
-
-#gallerycontent {
-  
-}
-
-input[type=checkbox] {
-  display: none;
-}
-
-.galleryrow {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
+#gallery {
+  background: url('../images/paws_background.jpg') right top/56% 73% repeat-y,
+              linear-gradient(to right, orange, white, white, white), center/100% no-repeat;
 }
 
 .gallerycolumn {
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
+}
+
+#gallerycontent {
+  
 }
 
 .galleryelement {
@@ -41,4 +36,18 @@ input[type=checkbox] {
 
 .galleryelement:hover img {
   transform: scale(1.5);
+}
+
+.galleryrow {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+#greeting-container {
+  margin-top: 20px;
+}
+
+input[type=checkbox] {
+  display: none;
 }
