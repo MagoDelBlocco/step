@@ -8,34 +8,46 @@
   </head>
 
   <!-- TODO: find a good page design for this page -->
-  <body>
-    <div id="content">
-      <div class="dropdown" onclick="navtoggle()">
-        <div id="bar1"></div>
-        <div id="bar2"></div>
-        <div id="bar3"></div>
-  
-        <div id="navmenu" class="dropdown_content">
-          <a href="../index.html">Welcome</a>
-          <a href="#">Portfolio</a>
-          <a href="catpage.html">Cat Gallery</a>
-        </div>
-      </div>
+  <body id="projects">
+    <div class="dropdown" onclick="navtoggle()">
+      <div id="bar1"></div>
+      <div id="bar2"></div>
+      <div id="bar3"></div>
 
+      <div id="navmenu" class="dropdown_content">
+        <a href="../index.html">Welcome</a>
+        <a href="#">Portfolio</a>
+        <a href="catpage.html">Cat Gallery</a>
+      </div>
+    </div>
+    
+    <div id="projects-content">
       <h1>Personal Projects</h1>
       <p>This page contains all the projects that I was involved in:</p>
 
-      <button class="collapsible" onclick="expand_collapsible(this)">First Project</button>
+      <button class="collapsible" onclick="expand_collapsible(this)">Optical Character Recognition</button>
       <div class="collapsible-content">
-        <p>Placeholder 1</p>
+        <p>Designed and implemented a C++ program built from the ground up that uses machine learning to recognize digits from png images. Trained using the MNIST dataset.</p>
       </div>
-      <button class="collapsible" onclick="expand_collapsible(this)">Second Project</button>
+
+      <button class="collapsible" onclick="expand_collapsible(this)">Uber Simulator</button>
       <div class="collapsible-content">
-        <p>Placeholder 2</p>
+        <p>Built a C++ program that simulates how a ride-service hailing app handles queries from customers. It takes into consideration how much fuel a driver has, it's average speed and the amount of time the client is willing to wait </p>
       </div>
-      <button class="collapsible" onclick="expand_collapsible(this)">Third Project</button>
+
+      <button class="collapsible" onclick="expand_collapsible(this)">Artificial Neural Network playing Flappy Bird</button>
       <div class="collapsible-content">
-        <p>Placeholder 3</p>
+        <p>Developed a C++ program which has a basic graphical interface, can allow the user to play the Flappy Bird game, or can let an ANN train to play it, using an evolutionary algorithm.</p>
+      </div>
+
+      <button class="collapsible" onclick="expand_collapsible(this)">Facial Recognition</button>
+      <div class="collapsible-content">
+        <p>Implemented a Matlab program that is able to be trained on portraits of people, and create an eigenspace of human faces. Based on that, it can recognize if the image presented is a portrait of a human.</p>
+      </div>
+
+      <button class="collapsible" onclick="expand_collapsible(this)">Chess Engine</button>
+      <div class="collapsible-content">
+        <p>Created a C++ chess engine, using the Chess Engine Communication Protocol. It is able to reach a depth of 10 while searching in the minimax tree, using heuristics like MTD(f), delta pruning, killer move heuristic.</p>
       </div>
     </div>
   </body>
