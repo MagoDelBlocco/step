@@ -80,7 +80,8 @@
   background: #eee;
   font-size: 20px;
   height: auto;
-  width: 100%;
+  padding: 0 50px 0 50px;
+  width: auto;
 }
 
 #mybackground {
