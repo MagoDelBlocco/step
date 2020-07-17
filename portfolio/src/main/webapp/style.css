@@ -9,22 +9,14 @@
 }
 
 #gallery {
-  background: url('../images/paws_background.jpg') right top/56% 73% repeat-y,
-              linear-gradient(to right, orange, white, white, white), center/100% no-repeat;
+  background: url('../images/paws_background.jpg') right top/1200px 1754px repeat-y,
+              linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
 }
 
 .gallerycolumn {
   flex: 30%;
   max-width: 30%;
   padding: 0 4px;
-}
-
-#gallerycontent {
-  
-}
-
-.galleryelement {
-  height: 300px;
 }
 
 .galleryelement img {
