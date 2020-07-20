@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function expand_collapsible(element) {
-  var content = element.nextElementSibling;
+function expandCollapsible(element) {
+  const content = element.nextElementSibling;
 
   content.style.maxHeight = content.style.maxHeight ? null :
                                                       content.scrollHeight + 'px';
