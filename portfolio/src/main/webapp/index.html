@@ -7,12 +7,48 @@
     <script src="script.js"></script>
   </head>
   <body>
+    <!-- TODO: remove this div -->
     <div id="content">
       <h1>Bogdan Ciobanu's Portfolio</h1>
       <p>This is my portfolio.</p>
       <p>Click here to get a random message:</p>
       <button onclick="addRandomQuote()">Hello</button>
       <div id="quote-container"></div>
+    </div>
+
+    <div id="background">
+      <div class="dropdown" onclick="navtoggle()">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+  
+        <div id="navmenu" class="dropdown_content">
+          <a href="#">Test 1</a>
+          <a href="#">Test 2</a>
+          <a href="#">Test 3</a>
+        </div>
+      </div>
+  
+      <div id="whoami" class="sections">
+        <h1 class="centered-text">About me</h1>
+      </div>
+
+      <div id="mybackground" class="sections">
+        <h1 class="centered-text">Background</h1>
+      </div>
+
+      <div id="interests" class="sections">
+        <h1 class="centered-text">My interests</h1>
+      </div>
+
+      <div id="funfacts" class="sections">
+        <h1 class="centered-text">Fun facts</h1>
+      </div>
+
+      <div id="contact" class="sections">
+        <h1 class="centered-text">Contact</h1>
+      </div>
+
     </div>
   </body>
 </html>

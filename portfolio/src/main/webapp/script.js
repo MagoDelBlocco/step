@@ -30,3 +30,7 @@ function addRandomQuote() {
 
 
 }
+
+function navtoggle() {
+  document.getElementById('navmenu').classList.toggle('visible');
+}
