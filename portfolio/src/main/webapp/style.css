@@ -9,8 +9,20 @@
 }
 
 #gallery {
-  background: url('../images/paws_background.jpg') right top/1200px 1754px repeat-y,
+  background: url('../images/paws_background.jpg') right top/1000px 1600px repeat-y,
               linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
+}
+
+.gallery-greeting {
+  font-family: "Lucida Console", Courier, monospace;
+}
+
+#gallery-text {
+  font-size: large
+}
+
+#gallery-title {
+  font-size: larger
 }
 
 .gallerycolumn {
