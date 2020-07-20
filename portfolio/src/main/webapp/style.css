@@ -97,13 +97,11 @@
 }
 
 .sections h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  font: small-caps bold 30px/1 Arial, Helvetica, sans-serif;
 }
 
 .titlecard {
-  font-family: "Lucida Console", Courier, monospace;
-  font-size: 32px;
+  font: small-caps bold 32px/1 Arial, Helvetica, sans-serif;
 }
 
 .visible {
@@ -111,5 +109,5 @@
 }
 
 #whoami {
-  top: 0px;
+  top: 0;
 }
