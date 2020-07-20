@@ -15,7 +15,7 @@
   max-height: 0;
   overflow: hidden;
   padding: 0 18px;
-  transition: max-height 0.2s ease-out;
+  transition: max-height .2s ease-out;
 }
 
 .collapsible:hover {
