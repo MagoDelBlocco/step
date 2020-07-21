@@ -8,7 +8,7 @@
   width: 35px;
 }
 
-.centered-text  {
+.centered-text {
   text-align: center;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .dropdown_content {
-  background-color: #d1d1d1;
+  background: #d1d1d1;
   display: none;
   position: absolute;
   z-index: 1;
@@ -38,8 +38,18 @@
 
 .dropdown_content a {
   color: black;
-  padding: 12px 16px;
   display: block;
+  padding: 12px 16px;
+}
+
+#bar1,
+#bar2,
+#bar3 {
+  background: black;
+  height: 5px;
+  margin: 6px 0;
+  transition: 0.2s;
+  width: 35px;
 }
 
 #frontcard {
@@ -105,7 +115,7 @@
 }
 
 .visible {
-  display:block;
+  display: block;
 }
 
 #whoami {
