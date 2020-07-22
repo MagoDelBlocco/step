@@ -26,24 +26,10 @@
   background: #eee;
 }
 
-.centered-text  {
-  text-align: center;
-}
-
 #projects-content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
-}
-
-#bar1,
-#bar2,
-#bar3 {
-  background-color: black;
-  height: 5px;
-  margin: 6px 0;
-  transition: .2s;
-  width: 35px;
 }
 
 .centered-text {
@@ -52,12 +38,6 @@
 
 #contact {
   top: 280px;
-}
-
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
 }
 
 #gallery {

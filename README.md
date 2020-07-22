@@ -6,8 +6,15 @@ This repo contains Bogdan Ciobanu's portfolio and STEP projects.
 
 ## Contents
 
-- A web app that contains the bio and portfolio of the author
-- Walkthroughs for building a similar app
+#### A web application which contains the bio and portfolio of the author
+- A frontpage with personal and contact info. The page has a modern layout,
+  with a parallax effect, with the content at the front.
+- A page which details various personal projects. Each project is listed
+  in a collapsible list, with additional details given when clicking the title.
+- A gallery page with photos of the author's cat. Each image is zoomable when
+  hovered over.
+
+#### Walkthroughs for building a similar app
 
 ## How to use
 Run the command ```mvn package appengine:run``` from the portfolio
