@@ -6,12 +6,100 @@
     <link rel="stylesheet" href="../style.css">
     <script src="../script.js"></script>
   </head>
-  <body>
-    <div id="content">
-      <h1>This is test 3</h1>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+
+  <body id="gallery">
+    <div id="gallerycontent">
+      <!-- Will render as expected when merging with Styling branch -->
+      <div class="dropdown" onclick="navtoggle()">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+  
+        <div id="navmenu" class="dropdown_content">
+          <a href="../index.html">Welcome</a>
+          <a href="projects.html">Portfolio</a>
+          <a href="#">Cat Gallery</a>
+        </div>
+      </div>
+
+      <h1 id="gallery-title" class="centered-text gallery-greeting">This is my cat, Toni</h1>
+      <p id="gallery-text" class="centered-text gallery-greeting">
+        He is a 3 year old European Shorthair.<br>
+        His favourite activites include sleeping, looking out of the window, and playing.<br>
+        He is very scared of vacuum cleaners, heights, and hair dryers. 
+      </p>
+
+      <div class="galleryrow">
+        <div class="gallerycolumn">
+          <div class="galleryelement">
+            <img src="../images/cat8.jpeg" alt="Barely awake">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat2.jpeg" alt="Sleeping covering eyes">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat4.jpeg" alt="Sleeping in box 2">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat5.jpeg" alt="Sleeping covering eyes 2">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat17.jpeg" alt="Closeup on books">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat10.jpeg" alt="Paws closeup">
+          </div>
+        </div>
+
+        <div class="gallerycolumn">
+          <div class="galleryelement">
+            <img src="../images/cat6.jpeg" alt="Sleeping like Puma logo">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat7.jpeg" alt="Sleeping like Puma logo 2">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat16.jpeg" alt="Sleeping like a pretzel">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat3.jpeg" alt="Contemplating at sunset">
+          </div>
+        </div>
+
+        <div class="gallerycolumn">
+          <div class="galleryelement">
+            <img src="../images/cat12.jpeg" alt="Beautyshot">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat13.jpeg" alt="Guarding a plant">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat14.jpeg" alt="Watching from above">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat15.jpeg" alt="Sticking tongue out">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat18.jpeg" alt="Sleeping belly-up">
+          </div>
+
+          <div class="galleryelement">
+            <img src="../images/cat19.jpeg" alt="Placeholder">
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
