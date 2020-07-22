@@ -1,8 +1,36 @@
+.collapsible {
+  background: #777;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  outline: none;
+  padding: 18px;
+  text-align: left;
+  width: 100%;
+}
+
+.collapsible-content {
+  background: #eee;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 18px;
+  transition: max-height .2s ease-out;
+}
+
+.collapsible:hover {
+  background: #555;
+}
+
+#projects {
+  background: #eee;
+}
+
 .centered-text  {
   text-align: center;
 }
 
-#content {
+#projects-content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
