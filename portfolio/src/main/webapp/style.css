@@ -29,9 +29,9 @@
 
 .galleryelement img {
   margin-top: 8px;
+  transition: transform .5s ease;
   vertical-align: middle;
   width: 100%;
-  transition: transform .5s ease;
 }
 
 .galleryelement:hover img {
