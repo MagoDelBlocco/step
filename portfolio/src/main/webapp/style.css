@@ -48,10 +48,15 @@
 
 #close-button {
   position: absolute;
-  color: #f1f1f1;
+  color: #eee;
   font: 100px bold;
   text-align: right;
   top: 30px;
+}
+
+#close-button:hover {
+  color: #bbb;
+  cursor: pointer;
 }
 
 #focus-image {
