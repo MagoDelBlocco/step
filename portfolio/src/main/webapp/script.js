@@ -19,25 +19,6 @@ function expandCollapsible(element) {
                                                       content.scrollHeight + 'px';
 }
 
-/**
- * Adds a random quote to the page.
- */
-function addRandomQuote() {
-  const quotes = 
-      ['Fun isn\'t something one considers when balancing the universe. But this... does put a smile on my face.',
-       'Perfectly balanced, as all things should be.',
-       'Dread it. Run from it. Destiny arrives all the same. And now it\'s here. Or should I say, I am.',
-       'I am...inevitable.',
-       'The hardest choices require the strongest wills.'];
-
-  const quote = quotes[Math.floor(Math.random() * quotes.length)];
-
-  const quoteContainer = document.getElementById('quote-container');
-  quoteContainer.innerText = quote;
-
-
-}
-
 function navtoggle() {
   document.getElementById('navmenu').classList.toggle('visible');
 }

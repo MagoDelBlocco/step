@@ -54,12 +54,6 @@
   top: 280px;
 }
 
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-}
-
 #gallery {
   background: url('../images/paws_background.jpg') right top/1000px 1600px repeat-y,
               linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
