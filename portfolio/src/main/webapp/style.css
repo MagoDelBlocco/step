@@ -49,8 +49,9 @@
 #close-button {
   position: absolute;
   color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
+  font: 100px bold;
+  text-align: right;
+  top: 30px;
 }
 
 #focus-image {
@@ -73,7 +74,7 @@
 }
 
 #modal {
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.85);
   display: none;
   height: 100%;
   left: 0;
