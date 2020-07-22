@@ -47,9 +47,9 @@
 }
 
 #close-button {
-  position: absolute;
   color: #eee;
   font: 100px bold;
+  position: absolute;
   text-align: right;
   top: 30px;
 }

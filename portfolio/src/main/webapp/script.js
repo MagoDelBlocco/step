@@ -28,16 +28,16 @@ function openModal(target, index) {
 
   modal.style.display = 'block';
   
-  var image = document.getElementById('focus-image');
-  var caption = document.getElementById('focus-image-caption');
-  var commSection = document.getElementById('comment-section');
+  const image = document.getElementById('focus-image');
+  const caption = document.getElementById('focus-image-caption');
+  const commSection = document.getElementById('comment-section');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
 }
 
 function closeModal() {
-  const modal = document.getElementById("modal");
+  const modal = document.getElementById('modal');
 
   modal.style.display = 'none';
 }
