@@ -1,3 +1,41 @@
+.collapsible {
+  background: #777;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  outline: none;
+  padding: 18px;
+  text-align: left;
+  width: 100%;
+}
+
+.collapsible-content {
+  background: #eee;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 18px;
+  transition: max-height .2s ease-out;
+}
+
+.collapsible:hover {
+  background: #555;
+}
+
+#projects {
+  background: #eee;
+}
+
+.centered-text  {
+  text-align: center;
+}
+
+#projects-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 650px;
+}
+
 #bar1,
 #bar2,
 #bar3 {
@@ -20,6 +58,42 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+}
+
+#gallery {
+  background: url('../images/paws_background.jpg') right top/1000px 1600px repeat-y,
+              linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
+}
+
+#gallery-text {
+  font: 16px/1 Arial, Helvetica, sans-serif;
+}
+
+#gallery-title {
+  font: small-caps bold 20px/1 Arial, Helvetica, sans-serif;
+}
+
+.gallerycolumn {
+  flex: 30%;
+  max-width: 30%;
+  padding: 0 4px;
+}
+
+.galleryelement img {
+  margin-top: 8px;
+  transition: transform .5s ease;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.galleryelement:hover img {
+  transform: scale(1.5);
+}
+
+.galleryrow {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
 .dropdown {
@@ -75,6 +149,10 @@
 
 #greeting-container {
   margin-top: 20px;
+}
+
+input[type=checkbox] {
+  display: none;
 }
 
 #interests {
