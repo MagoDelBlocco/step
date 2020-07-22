@@ -22,3 +22,22 @@ function expandCollapsible(element) {
 function navtoggle() {
   document.getElementById('navmenu').classList.toggle('visible');
 }
+
+function openModal(target, index) {
+  const modal = document.getElementById('modal');
+
+  modal.style.display = 'block';
+  
+  var image = document.getElementById('focus-image');
+  var caption = document.getElementById('focus-image-caption');
+  var commSection = document.getElementById('comment-section');
+
+  image.src = target.src;
+  caption.innerHTML = target.alt;
+}
+
+function closeModal() {
+  const modal = document.getElementById("modal");
+
+  modal.style.display = 'none';
+}

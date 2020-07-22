@@ -46,8 +46,43 @@
   width: 35px;
 }
 
-.centered-text {
+#close-button {
+  position: absolute;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#focus-image {
+  display: block;
+  margin: auto;
+  max-width: 700px;
+  width: 80%;
+}
+
+#focus-image-caption {
+  color: #eee;
+  display: block;
+  font: 12px/1 Arial, Helvetica, sans-serif;
+  height: 150px;
+  margin: auto;
+  max-width: 700px;
+  padding: 10px 0;
   text-align: center;
+  width: 80%;
+}
+
+#modal {
+  background: rgba(0,0,0,.75);
+  display: none;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  padding: 100px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 #contact {
@@ -81,7 +116,7 @@
 }
 
 .galleryelement:hover img {
-  transform: scale(1.5);
+  opacity: .75;
 }
 
 .galleryrow {
@@ -94,14 +129,14 @@
   cursor: pointer;
   display: inline-block;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
 }
 
 .dropdown_content {
   background: #d1d1d1;
   display: none;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 }
 
 .dropdown_content a {
@@ -110,20 +145,10 @@
   padding: 12px 16px;
 }
 
-#bar1,
-#bar2,
-#bar3 {
-  background: black;
-  height: 5px;
-  margin: 6px 0;
-  transition: 0.2s;
-  width: 35px;
-}
-
 #frontcard {
-  width: 100%;
-  height: 500px;
   background: rgba(0, 0, 0, .1);
+  height: 500px;
+  width: 100%;
 }
 
 #front-text {
