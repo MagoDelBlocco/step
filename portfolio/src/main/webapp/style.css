@@ -13,16 +13,12 @@
               linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
 }
 
-.gallery-greeting {
-  font-family: "Lucida Console", Courier, monospace;
-}
-
 #gallery-text {
-  font-size: large
+  font: 16px/1 Arial, Helvetica, sans-serif;
 }
 
 #gallery-title {
-  font-size: larger
+  font: small-caps bold 20px/1 Arial, Helvetica, sans-serif;
 }
 
 .gallerycolumn {
@@ -33,7 +29,7 @@
 
 .galleryelement img {
   margin-top: 8px;
-  transition: transform 0.5s ease;
+  transition: transform .5s ease;
   vertical-align: middle;
   width: 100%;
 }
