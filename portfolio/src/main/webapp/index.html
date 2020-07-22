@@ -6,17 +6,81 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      
-      The <a href="/pages/projects.html">portfolio</a>
-      The <a href="/pages/cat.html">cat</a>
+  <body> 
+    <div id="main-content">
+      <div class="dropdown" onclick="navtoggle()">
+        <div id="bar1"></div>
+        <div id="bar2"></div>
+        <div id="bar3"></div>
+  
+        <div id="navmenu" class="dropdown_content">
+          <a href="#">Test 1</a>
+          <a href="#">Test 2</a>
+          <a href="#">Test 3</a>
+        </div>
+      </div>
 
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <div id="frontcard">
+        <div id="front-text" class="titlecard">
+          <strong>Bogdan Ciobanu</strong><br>
+          Computer Engineering Student
+        </div>
+      </div>
+  
+      <header id="whoami" class="sections">
+        <h1 class="centered-text">About me</h1>
+      </header>
+      <div class="main-text">
+        <p>My name is Bogdan-Calin Ciobanu, I am a third year student at the "Politehnica"
+           University in Bucharest. I am currently a STEP intern at Google, and I will be working
+           on this site for the next 4 weeks. I have been programming for the last 10 years,
+           participating in various competitions in my country, Romania. I love playing videogames,
+           especially RPGs, and is my main hobby. As for the rest of my time, you can probably find
+           me watching movies, going for long walks or petting my cat. (Note: will add more content
+           here if I get inspired.)
+        </p>
+      </div>
+
+      <header id="mybackground" class="sections">
+        <h1 class="centered-text">Background</h1>
+      </header>
+      <div class="main-text">
+        <ul>
+          <li><strong>National Highschool "Mircea cel Batran" Constanta (2010 - 2018)</strong><br>
+                      Mathematics and IT class</li>
+          <li><strong>University "Politehnica" Bucharest (2018 - 2022)</strong><br>
+                      Faculty of Automation Control and Computers</li>
+        </ul>
+
+        <p>My interests include:
+          <ul>
+            <li>Numerical Methods</li>
+            <li>Parallel and Distributed Algorithms</li>
+            <li>Advanced Algorithms</li>
+            <li>Security</li> 
+            <li>Algorithm Analysis</li>
+          </ul>
+        </p>
+      </div>
+
+      <header id="funfacts" class="sections">
+        <h1 class="centered-text">Fun facts</h1>
+      </header>
+      <div class="main-text">
+        <ul>
+          <li>My favourite movie villain is Thanos <!-- TODO: insert quote thanos button here --></li>
+          <li>I have been a volleyball player for 11 years</li>
+          <li>I have a level 30 Steam account</li>
+        </ul>
+      </div>
+
+      <header id="contact" class="sections">
+        <h1 class="centered-text">Contact</h1>
+      </header>
+      <div class="main-text">
+        <p><a href="mailto:bgdn.ciobanu12@gmail.com">E-mail</a></p>
+        <p><a href="https://github.com/MagoDelBlocco">GitHub</a></p>
+      </div>
     </div>
   </body>
 </html>
