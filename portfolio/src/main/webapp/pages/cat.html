@@ -24,8 +24,20 @@
       <div id="modal">
         <span id="close-button" onclick="closeModal()">×</span>
         <img id="focus-image">
+        <div id="focus-image-index"></div>  <!-- This is used only by the server -->
         <div id="focus-image-caption"></div>
-        <div id="comment-section"></div>
+        <div id="comment-section">
+          <form onsubmit="postComment()">
+            <label for="username" id="comm-username-label">Username:</label><br>
+            <input type="text" id="comm-username"><br>
+            <label for="comment" id="comm-body-label">Comment:</label><br>
+            <input type="text" id="comm-body">
+            <label for="image-id"></label>
+            <input type="submit" value="Submit">
+          </form>
+          <div id="previous-comments"></div>
+          <span id="comment-separator"
+        </div>
       </div>
 
       <h1 id="gallery-title" class="centered-text gallery-greeting">This is my cat, Toni</h1>

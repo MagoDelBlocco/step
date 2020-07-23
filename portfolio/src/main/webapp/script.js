@@ -30,14 +30,38 @@ function openModal(target, index) {
   
   const image = document.getElementById('focus-image');
   const caption = document.getElementById('focus-image-caption');
-  const commSection = document.getElementById('comment-section');
+  const imageIndex = document.getElementById('focus-image-index');
+  const commSection = document.getElementById('previous-comments');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
+  imageIndex.innerText = index;
+
+  const params = new URLSearchParams();
+  params.append('id', index);
+
+  const response = await fetch('/data/?' + params.toString(), {
+                                                                method:'GET'
+  });
+  const comments = await response.text();
+
+  commSection.innerHTML = comments;
 }
 
 function closeModal() {
   const modal = document.getElementById('modal');
 
   modal.style.display = 'none';
+}
+
+function postComment() {
+  const comment = document.querySelector('form');
+  const formData = new FormData(comment);
+
+  formData.append('id', document.getElementById('focus-image-index').innerText);
+
+  fetch('/data', {
+                   method: 'POST',
+                   body: formData
+                 });
 }

@@ -36,6 +36,32 @@
   width: 650px;
 }
 
+#comment-section {
+  background: #eee center;
+  height: 500px;
+  min-height: 100px;
+  width: 90%;
+}
+
+#comm-body {
+  height: auto;
+  margin: 0 0 0 25px;
+  min-height: 40px;
+  width: 500px;
+}
+
+#comm-body-label {
+  margin: 10px 0 0 25px;
+}
+
+#comm-username {
+  margin: 0 0 0 25px;
+}
+
+#comm-username-label {
+  margin: 10px 0 0 25px;
+}
+
 #bar1,
 #bar2,
 #bar3 {
@@ -76,6 +102,10 @@
   padding: 10px 0;
   text-align: center;
   width: 80%;
+}
+
+#focus-image-index {
+  font: 0;
 }
 
 #modal {
