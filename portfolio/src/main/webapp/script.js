@@ -23,15 +23,15 @@ function navtoggle() {
   document.getElementById('navmenu').classList.toggle('visible');
 }
 
-function openModal(target, index) {
+async function openModal(target, index) {
   const modal = document.getElementById('modal');
 
   modal.style.display = 'block';
   
-  const image = document.getElementById('focus-image');
-  const caption = document.getElementById('focus-image-caption');
-  const imageIndex = document.getElementById('focus-image-index');
-  const commSection = document.getElementById('previous-comments');
+  const image = document.getElementById('focus-image'),
+        caption = document.getElementById('focus-image-caption'),
+        imageIndex = document.getElementById('focus-image-index'),
+        commSection = document.getElementById('previous-comments');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
@@ -40,8 +40,8 @@ function openModal(target, index) {
   const params = new URLSearchParams();
   params.append('id', index);
 
-  const response = await fetch('/data/?' + params.toString(), {
-                                                                method:'GET'
+  const response = await fetch('/data?' + index, {
+                                                   method:'GET'
   });
   const comments = await response.text();
 
@@ -57,11 +57,9 @@ function closeModal() {
 function postComment() {
   const comment = document.querySelector('form');
   const formData = new FormData(comment);
+  const request = new XMLHttpRequest();
 
-  formData.append('id', document.getElementById('focus-image-index').innerText);
-
-  fetch('/data', {
-                   method: 'POST',
-                   body: formData
-                 });
+  request.open('POST', '/data');
+  formData.append('id', document.getElementById('focus-image-index'));
+  request.send(formData);
 }

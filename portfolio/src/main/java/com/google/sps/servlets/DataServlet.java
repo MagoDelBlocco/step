@@ -24,9 +24,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  String test = "DEFAULT";
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Step 1 done!</h1>");
+    
+    response.getWriter().println(test);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    java.util.Enumeration<String> blaBla = request.getParameterNames();
+
+    while (blaBla.hasMoreElements()) {
+      test += blaBla.nextElement();
+    }
   }
 }
