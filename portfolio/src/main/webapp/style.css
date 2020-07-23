@@ -22,12 +22,12 @@
   background: #555;
 }
 
-#projects {
-  background: #eee;
+.centered-text {
+  text-align: center;
 }
 
-.centered-text  {
-  text-align: center;
+#projects {
+  background: #eee;
 }
 
 #projects-content {
