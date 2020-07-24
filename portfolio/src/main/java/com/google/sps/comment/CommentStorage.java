@@ -32,32 +32,30 @@ public class CommentStorage {
     storage = DatastoreServiceFactory.getDatastoreService();
   }
 
-  public void addComment(final String username, final String commentBody, final String id) {
-    System.out.println(username + " " + commentBody + " " + id);
-
+  public void addComment(final String username, final String commentBody, final String id,
+                                                                          final String entity) {
     Integer idx = Integer.parseInt(id);
-    if (idx < 0 || idx > Constants.IMG_COUNT) {
-      return;
+
+    if (idx > 0 && idx <= Constants.IMG_COUNT) {
+      StringBuilder entityID = new StringBuilder(entity);
+      entityID.append(id);
+
+      Entity commentEntity = new Entity(entityID.toString());
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");  
+      Date date = new Date();  
+
+      commentEntity.setProperty("username", username.equals("") ? "Anonymous" : username);
+      commentEntity.setProperty("timestamp", dateFormatter.format(date));
+      commentEntity.setProperty("body", commentBody.equals("") ? "Nothing" : commentBody);
+
+      storage.put(commentEntity);
     }
-
-    StringBuilder entityID = new StringBuilder("Comment");
-    entityID.append(id);
-
-    Entity commentEntity = new Entity(entityID.toString());
-    SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");  
-    Date date = new Date();  
-
-    commentEntity.setProperty("username", username.equals("") ? "Anonymous" : username);
-    commentEntity.setProperty("timestamp", dateFormatter.format(date));
-    commentEntity.setProperty("body", commentBody.equals("") ? "Nothing" : commentBody);
-
-    storage.put(commentEntity);
   }
 
-  public ArrayList<Entity> getComments(final String id) {
+  public ArrayList<Entity> getComments(final String id, final String entity) {
     ArrayList<Entity> retval = new ArrayList<>();
     Integer idx = Integer.parseInt(id);
-    StringBuilder entityID = new StringBuilder("Comment");
+    StringBuilder entityID = new StringBuilder(entity);
     entityID.append(id);
 
     if (idx > 0 && idx <= Constants.IMG_COUNT) {

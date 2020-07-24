@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that returns some example content.*/
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private CommentStorage commentStorage = new CommentStorage();
@@ -34,14 +34,15 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
 
     response.getWriter().println(
-             formatCommentsBulk(commentStorage.getComments(request.getQueryString())));
+             formatCommentsBulk(commentStorage.getComments(request.getQueryString())), "Comment");
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     commentStorage.addComment(request.getParameter("username"),
                               request.getParameter("comment"),
-                              request.getParameter("image-id"));
+                              request.getParameter("image-id"),
+                              "Comment");
   }
 
   private String formatCommentsBulk(final ArrayList<Entity> comments) {
