@@ -23,16 +23,6 @@ import org.junit.runners.JUnit4;
 public final class CommentStorageTest {
 
   @Test
-  public void testGreeting() {
-    Greeter greeter = new Greeter();
-
-    String greeting = greeter.greet("Ada");
-
-    Assert.assertEquals("Hello Ada", greeting);
-  }
-
-
-  @Test
   public void testAddComment() {
     //  I think doing dependency injection for the date is overkill right now
     CommentStorage storage = new CommentStorage();
