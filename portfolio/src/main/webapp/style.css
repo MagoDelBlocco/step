@@ -151,6 +151,19 @@
   padding: 12px 16px;
 }
 
+.dropdown_content a:hover {
+  background: #aaa;
+  transition: .1s ease-out;
+}
+
+#navmenu-current-location {
+  background: #aaa;
+}
+
+#navmenu {
+  width: 200px;
+}
+
 #frontcard {
   background: rgba(0, 0, 0, .1);
   height: 500px;
