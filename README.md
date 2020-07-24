@@ -13,6 +13,9 @@ This repo contains Bogdan Ciobanu's portfolio and STEP projects.
   in a collapsible list, with additional details given when clicking the title.
 - A gallery page with photos of the author's cat. Each image is zoomable when
   hovered over.
+- Each image in the gallery has it's own comment section, handled by the
+  Java Servlet backend. Each comment section is stored in the DataStore service
+  and is retrieved accordingly to what image the user has clicked.
 
 #### Walkthroughs for building a similar app
 
