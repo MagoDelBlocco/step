@@ -33,7 +33,7 @@
 #projects-content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 800px;
 }
 
 #bar1,
@@ -140,7 +140,7 @@
 }
 
 .dropdown_content {
-  background: #d1d1d1;
+  background: #aaa;
   display: none;
   position: absolute;
   z-index: 2;
@@ -155,12 +155,12 @@
 }
 
 .dropdown_content a:hover {
-  background: #aaa;
+  background: #777;
   transition: .1s ease-out;
 }
 
 #navmenu-current-location {
-  background: #aaa;
+  background: #777;
 }
 
 #navmenu {
@@ -174,8 +174,11 @@
 }
 
 #front-text {
-  bottom: 0;
-  height: 35%;
+  backdrop-filter: blur(2px);
+/*background: #000;*/
+  bottom: 40%;
+/*  color: white;*/
+  height: 70px;
   left: 0;
   margin: auto;
   position: absolute;
