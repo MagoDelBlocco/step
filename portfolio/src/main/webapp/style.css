@@ -49,9 +49,10 @@
 #close-button {
   color: #eee;
   font: 100px bold;
-  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
   text-align: right;
-  top: 30px;
+  top: 10px;
 }
 
 #close-button:hover {
