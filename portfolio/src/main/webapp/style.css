@@ -62,6 +62,10 @@
   margin: 10px 0 0 25px;
 }
 
+#image-id {
+  display: none;
+}
+
 #bar1,
 #bar2,
 #bar3 {
@@ -245,6 +249,10 @@ input[type=checkbox] {
 
 .titlecard {
   font: small-caps bold 32px/1 Arial, Helvetica, sans-serif;
+}
+
+.invisible {
+  display: none;
 }
 
 .visible {

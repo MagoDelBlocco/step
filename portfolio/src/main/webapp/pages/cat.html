@@ -24,19 +24,19 @@
       <div id="modal">
         <span id="close-button" onclick="closeModal()">×</span>
         <img id="focus-image">
-        <div id="focus-image-index"></div>  <!-- This is used only by the server -->
         <div id="focus-image-caption"></div>
         <div id="comment-section">
-          <form onsubmit="postComment()">
-            <label for="username" id="comm-username-label">Username:</label><br>
-            <input type="text" id="comm-username"><br>
-            <label for="comment" id="comm-body-label">Comment:</label><br>
-            <input type="text" id="comm-body">
-            <label for="image-id"></label>
-            <input type="submit" value="Submit">
+          <form id="comment-form" action="/data" method="POST" target="dummy">
+            <label for="comm-username" id="comm-username-label">Username:</label><br>
+            <input type="text" name="username" id="comm-username"><br>
+            <label for="comm-body" id="comm-body-label">Comment:</label><br>
+            <input type="text" name="comment" id="comm-body">
+            <input type="text" name="image-id" id="image-id">
+            <input type="submit" value="Submit" onclick="submitComment()">
           </form>
           <div id="previous-comments"></div>
         </div>
+        <iframe name="dummy" id="dummy" class="invisible"></iframe>
       </div>
 
       <h1 id="gallery-title" class="centered-text gallery-greeting">This is my cat, Toni</h1>

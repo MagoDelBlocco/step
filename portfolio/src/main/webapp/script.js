@@ -30,12 +30,12 @@ async function openModal(target, index) {
   
   const image = document.getElementById('focus-image'),
         caption = document.getElementById('focus-image-caption'),
-        imageIndex = document.getElementById('focus-image-index'),
+        imageID = document.getElementById('image-id'),
         commSection = document.getElementById('previous-comments');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
-  imageIndex.innerText = index;
+  imageID.value = index;
 
   const params = new URLSearchParams();
   params.append('id', index);
@@ -54,12 +54,8 @@ function closeModal() {
   modal.style.display = 'none';
 }
 
-function postComment() {
-  const comment = document.querySelector('form');
-  const formData = new FormData(comment);
-  const request = new XMLHttpRequest();
+function submitComment() {
+  document.forms['comment-form'].submit();
 
-  request.open('POST', '/data');
-  formData.append('id', document.getElementById('focus-image-index'));
-  request.send(formData);
+  location.reload();
 }
