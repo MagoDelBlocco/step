@@ -49,7 +49,7 @@ public class CommentStorage {
 
     if (idx > 0 && idx <= Constants.IMG_COUNT) {
       Entity commentEntity = new Entity(entity + id);
-      SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");  
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");  
 
       commentEntity.setProperty("username", username.equals("") ? "Anonymous" : username);
       commentEntity.setProperty("timestamp", dateFormatter.format(new Date()));

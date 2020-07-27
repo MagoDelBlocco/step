@@ -18,14 +18,52 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.PreparedQuery;
 
 @RunWith(JUnit4.class)
 public final class CommentStorageTest {
+  private DatastoreService exposedStorage;
+
+  public CommentStorageTest() {
+    exposedStorage = DatastoreServiceFactory.getDatastoreService();
+  }
 
   @Test
-  public void testAddComment() {
-    CommentStorage storage = new CommentStorage();
+  public void testAddEntryIds() {
+    // CommentStorage storage = new CommentStorage();
 
-    // TODO: make CommentStorage::storage package-visibile, and assert on it?
+    // storage.addStorageEntry("", "", "1", "TEST");
+    // storage.addStorageEntry("", "", "-1", "TEST");
+    // storage.addStorageEntry("", "", "abcd", "TEST");
+
+    // Query query = new Query("TEST1");
+    // PreparedQuery results = exposedStorage.prepare(query);
+
+    // Assert.assertEquals(elemCount(results.asIterable()), 1);
+
+    // query = new Query("TEST-1");
+    // results = exposedStorage.prepare(query);
+
+    // Assert.assertEquals(elemCount(results.asIterable()), 0);
+
+    // query = new Query("TESTabcd");
+    // results = exposedStorage.prepare(query);
+
+    // Assert.assertEquals(elemCount(results.asIterable()), 0);
+  }
+
+  private int elemCount(final Iterable<Entity> target) {
+    int retval = 0;
+
+    for (Entity it : target) {
+      ++retval;
+    }
+
+    return retval;
   }
 }
