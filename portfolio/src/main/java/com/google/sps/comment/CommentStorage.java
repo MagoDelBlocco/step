@@ -23,7 +23,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.PreparedQuery;
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;  
-import java.util.Date; 
+import java.util.Date;
+import java.lang.NumberFormatException;
 
 /** Wrapper over Datastore. Allows for safe adding and retrieval of entities, requiring
  * a specific format, all fields as Strings: [author name], [entity body], [entity name],
@@ -39,9 +40,10 @@ public class CommentStorage {
   /** If the entity id doesn't have a numeric format, the request will be ignored. */
   public void addStorageEntry(final String username, final String body,
                               final String id,       final String entity) {
+    int idx;
     try {
-      int idx = Integer.parseInt(id);
-    } catch(NumericFormatException e) {
+      idx = Integer.parseInt(id);
+    } catch(NumberFormatException e) {
       return;
     }
 
@@ -59,15 +61,16 @@ public class CommentStorage {
 
   /** If  the entity id doesn't have a numeric format, the request will return null. */
   public Iterable<Entity> getStorageEntries(final String keyword, final String id) {
+    int idx;
     try {
-      int idx = Integer.parseInt(id);
-    } catch(NumericFormatException e) {
+      idx = Integer.parseInt(id);
+    } catch(NumberFormatException e) {
       return null;
     }
 
     if (idx > 0 && idx <= Constants.IMG_COUNT) {
       Query query = new Query(keyword + id).addSort("timestamp", SortDirection.DESCENDING);
-      PreparedQuery results = storage.prepare(query);+
+      PreparedQuery results = storage.prepare(query);
 
       return results.asIterable();
     } else {

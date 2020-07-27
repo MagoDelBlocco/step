@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package com.google.sps;
+package com.google.sps.comment;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,14 +24,7 @@ public final class CommentStorageTest {
 
   @Test
   public void testAddComment() {
-    //  I think doing dependency injection for the date is overkill right now
     CommentStorage storage = new CommentStorage();
-
-    storage.addComment("test1", "this is test1", "1", "TEST");
-    storage.addComment("test2", "this is test2", "0", "TEST");
-    storage.addComment("test3", "this is test3", "16", "TEST");
-    storage.addComment("test4", "this is test4", "-1", "TEST");
-    storage.addComment("test5", "this is test5", "5", "BEST");
 
     // TODO: make CommentStorage::storage package-visibile, and assert on it?
   }
