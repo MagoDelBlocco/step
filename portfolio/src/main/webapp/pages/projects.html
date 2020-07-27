@@ -15,36 +15,38 @@
 
       <div id="navmenu" class="dropdown_content">
         <a href="../index.html">Welcome</a>
-        <a href="#">Portfolio</a>
+        <a href="#" id="navmenu-current-location">Portfolio</a>
         <a href="./cat.html">Cat Gallery</a>
       </div>
     </div>
     
     <div id="projects-content">
-      <h1>Personal Projects</h1>
-      <p>This page contains all the projects that I was involved in:</p>
+      <div class="titlecard">
+        <h1><strong>Personal Projects</strong></h1>
+        <p>This page contains all the projects that I was involved in:</p>
+      </div>
 
-      <button class="collapsible" onclick="expandCollapsible(this)">Optical Character Recognition</button>
+      <button class="collapsible" onclick="expandCollapsible(this)"><strong>Optical Character Recognition</strong></button>
       <div class="collapsible-content">
         <p>Designed and implemented a C++ program built from the ground up that uses machine learning to recognize digits from png images. Trained using the MNIST dataset.</p>
       </div>
 
-      <button class="collapsible" onclick="expandCollapsible(this)">Uber Simulator</button>
+      <button class="collapsible" onclick="expandCollapsible(this)"><strong>Uber Simulator</strong></button>
       <div class="collapsible-content">
         <p>Built a C++ program that simulates how a ride-service hailing app handles queries from customers. It takes into consideration how much fuel a driver has, it's average speed and the amount of time the client is willing to wait </p>
       </div>
 
-      <button class="collapsible" onclick="expandCollapsible(this)">Artificial Neural Network playing Flappy Bird</button>
+      <button class="collapsible" onclick="expandCollapsible(this)"><strong>Artificial Neural Network playing Flappy Bird</strong></button>
       <div class="collapsible-content">
         <p>Developed a C++ program which has a basic graphical interface, can allow the user to play the Flappy Bird game, or can let an ANN train to play it, using an evolutionary algorithm.</p>
       </div>
 
-      <button class="collapsible" onclick="expandCollapsible(this)">Facial Recognition</button>
+      <button class="collapsible" onclick="expandCollapsible(this)"><strong>Facial Recognition</strong></button>
       <div class="collapsible-content">
         <p>Implemented a Matlab program that is able to be trained on portraits of people, and create an eigenspace of human faces. Based on that, it can recognize if the image presented is a portrait of a human.</p>
       </div>
 
-      <button class="collapsible" onclick="expandCollapsible(this)">Chess Engine</button>
+      <button class="collapsible" onclick="expandCollapsible(this)"><strong>Chess Engine</strong></button>
       <div class="collapsible-content">
         <p>Created a C++ chess engine, using the Chess Engine Communication Protocol. It is able to reach a depth of 10 while searching in the minimax tree, using heuristics like MTD(f), delta pruning, killer move heuristic.</p>
       </div>

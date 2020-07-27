@@ -33,7 +33,7 @@
 #projects-content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 800px;
 }
 
 #bar1,
@@ -49,9 +49,10 @@
 #close-button {
   color: #eee;
   font: 100px bold;
-  position: absolute;
+  position: -webkit-sticky;
+  position: sticky;
   text-align: right;
-  top: 30px;
+  top: 10px;
 }
 
 #close-button:hover {
@@ -139,7 +140,7 @@
 }
 
 .dropdown_content {
-  background: #d1d1d1;
+  background: #aaa;
   display: none;
   position: absolute;
   z-index: 2;
@@ -148,7 +149,22 @@
 .dropdown_content a {
   color: black;
   display: block;
+  font: 20px/1 Arial, Helvetica, sans-serif;
   padding: 12px 16px;
+  text-decoration: none;
+}
+
+.dropdown_content a:hover {
+  background: #777;
+  transition: .1s ease-out;
+}
+
+#navmenu-current-location {
+  background: #777;
+}
+
+#navmenu {
+  width: 200px;
 }
 
 #frontcard {
@@ -158,8 +174,9 @@
 }
 
 #front-text {
-  bottom: 0;
-  height: 35%;
+  backdrop-filter: blur(2px);
+  bottom: 40%;
+  height: 70px;
   left: 0;
   margin: auto;
   position: absolute;
