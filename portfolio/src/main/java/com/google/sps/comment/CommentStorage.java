@@ -25,6 +25,10 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;  
 import java.util.Date; 
 
+/** Wrapper over Datastore. Allows for safe adding and retrieval of entities, requiring
+ * a specific format, all fields as Strings: [author name], [entity body], [entity name],
+ * entity's section id.
+ */
 public class CommentStorage {
   private DatastoreService storage;
 
@@ -32,41 +36,42 @@ public class CommentStorage {
     storage = DatastoreServiceFactory.getDatastoreService();
   }
 
-  public void addComment(final String username, final String commentBody, final String id,
-                                                                          final String entity) {
-    Integer idx = Integer.parseInt(id);
+  /** If the entity id doesn't have a numeric format, the request will be ignored. */
+  public void addStorageEntry(final String username, final String body,
+                              final String id,       final String entity) {
+    try {
+      int idx = Integer.parseInt(id);
+    } catch(NumericFormatException e) {
+      return;
+    }
 
     if (idx > 0 && idx <= Constants.IMG_COUNT) {
-      StringBuilder entityID = new StringBuilder(entity);
-      entityID.append(id);
-
-      Entity commentEntity = new Entity(entityID.toString());
+      Entity commentEntity = new Entity(entity + id);
       SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/mm/yyyy hh:mm");  
-      Date date = new Date();  
 
       commentEntity.setProperty("username", username.equals("") ? "Anonymous" : username);
-      commentEntity.setProperty("timestamp", dateFormatter.format(date));
-      commentEntity.setProperty("body", commentBody.equals("") ? "Nothing" : commentBody);
+      commentEntity.setProperty("timestamp", dateFormatter.format(new Date()));
+      commentEntity.setProperty("body", body.equals("") ? "Nothing" : body);
 
       storage.put(commentEntity);
     }
   }
 
-  public ArrayList<Entity> getComments(final String id, final String entity) {
-    ArrayList<Entity> retval = new ArrayList<>();
-    Integer idx = Integer.parseInt(id);
-    StringBuilder entityID = new StringBuilder(entity);
-    entityID.append(id);
-
-    if (idx > 0 && idx <= Constants.IMG_COUNT) {
-      Query query = new Query(entityID.toString()).addSort("timestamp", SortDirection.DESCENDING);
-      PreparedQuery results = storage.prepare(query);
-
-      for (Entity it : results.asIterable()) {
-        retval.add(it);
-      }
+  /** If  the entity id doesn't have a numeric format, the request will return null. */
+  public Iterable<Entity> getStorageEntries(final String keyword, final String id) {
+    try {
+      int idx = Integer.parseInt(id);
+    } catch(NumericFormatException e) {
+      return null;
     }
 
-    return retval;
+    if (idx > 0 && idx <= Constants.IMG_COUNT) {
+      Query query = new Query(keyword + id).addSort("timestamp", SortDirection.DESCENDING);
+      PreparedQuery results = storage.prepare(query);+
+
+      return results.asIterable();
+    } else {
+      return null;
+    }
   }
 }

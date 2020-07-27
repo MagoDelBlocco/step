@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content.*/
+/** Servlet that handles adding and fetching comments in individual sections
+ *  The server also handles the html format of the comments.
+ */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
   private CommentStorage commentStorage = new CommentStorage();
@@ -34,18 +36,23 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
 
     response.getWriter().println(
-             formatCommentsBulk(commentStorage.getComments(request.getQueryString())), "Comment");
+             formatCommentsBulk(commentStorage.
+             getStorageEntries("Comment", request.getQueryString())));
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    commentStorage.addComment(request.getParameter("username"),
-                              request.getParameter("comment"),
-                              request.getParameter("image-id"),
-                              "Comment");
+    commentStorage.addStorageEntry(request.getParameter("username"),
+                                   request.getParameter("comment"),
+                                   request.getParameter("image-id"),
+                                   "Comment");
   }
 
-  private String formatCommentsBulk(final ArrayList<Entity> comments) {
+  private String formatCommentsBulk(final Iterable<Entity> comments) {
+    if (comments == null) {
+      return Constants.INVALID_ID;
+    }
+
     StringBuilder formattedComments = new StringBuilder();
 
     for (Entity it : comments) {

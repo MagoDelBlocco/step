@@ -41,7 +41,7 @@ async function openModal(target, index) {
   params.append('id', index);
 
   const response = await fetch('/data?' + index, {
-                                                   method:'GET'
+                                                   method: 'GET'
   });
   const comments = await response.text();
 

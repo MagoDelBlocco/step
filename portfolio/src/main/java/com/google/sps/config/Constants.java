@@ -16,4 +16,5 @@ package com.google.sps.config;
 
 public class Constants {
   public static final Integer IMG_COUNT = 16;
+  public static final String INVALID_ID = "Invalid section ID";
 }
