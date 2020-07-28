@@ -38,8 +38,11 @@
 
 #comment-section {
   background: #eee center;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
   min-height: 100px;
+  overflow-y: auto;
   width: 90%;
 }
 
