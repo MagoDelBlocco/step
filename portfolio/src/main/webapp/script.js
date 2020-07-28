@@ -28,10 +28,9 @@ async function openModal(target, index) {
 
   modal.style.display = 'block';
   
-  const image = document.getElementById('focus-image'),
-        caption = document.getElementById('focus-image-caption'),
-        imageID = document.getElementById('image-id'),
-        commSection = document.getElementById('previous-comments');
+  const image = document.getElementById('focus-image');
+  const caption = document.getElementById('focus-image-caption');
+  const imageID = document.getElementById('image-id');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
@@ -44,8 +43,23 @@ async function openModal(target, index) {
                                                    method: 'GET'
   });
   const comments = await response.text();
+  
+  displayComments(comments, document.getElementById('previous-comments'));
+}
 
-  commSection.innerHTML = comments;
+function displayComments(comments, commSection) {
+  const commentsJSON = eval(comments);
+
+  for (let i = 0; i < commentsJSON.length; ++i) {
+    const commentHeader = document.createElement('h5');
+    commentHeader.innerText = commentsJSON[i].username + ' said at ' +
+                              commentsJSON[i].zorblax + ':';
+    commSection.appendChild(commentHeader);
+
+    const commentBody = document.createElement('div');
+    commentBody.innerText = commentsJSON[i].body;
+    commSection.appendChild(commentBody);
+  }
 }
 
 function closeModal() {

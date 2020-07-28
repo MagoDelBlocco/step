@@ -35,7 +35,7 @@ public class DataServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
 
-    response.getWriter().println(
+    response.getWriter().print(
              formatCommentsBulk(commentStorage.
              getStorageEntries("Comment", request.getQueryString())));
   }
@@ -53,19 +53,20 @@ public class DataServlet extends HttpServlet {
       return Constants.INVALID_ID;
     }
 
-    StringBuilder formattedComments = new StringBuilder();
+    StringBuilder formattedComments = new StringBuilder("[");
 
     for (Entity it : comments) {
-      formattedComments.append(formatComment(it));
+      formattedComments.append(formatComment(it)).append(",");
     }
+
+    formattedComments.append("]");
 
     return formattedComments.toString();
   }
 
   private String formatComment(final Entity comment) {
-    return "<div class=\"comment\">" + "<h6 class=\"comment-username\">" +
-           comment.getProperty("username") + " said at " +
-           comment.getProperty("timestamp") + ":</h6>" +
-           comment.getProperty("body") + "</div>";
+    return "{'username': '"  + comment.getProperty("username") +
+         "', 'zorblax': '" + comment.getProperty("timestamp") +
+         "', 'body': '"      + comment.getProperty("body") + "'}"; 
   }
 }

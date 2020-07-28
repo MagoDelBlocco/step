@@ -40,7 +40,7 @@
   background: #eee center;
   display: flex;
   flex-direction: column;
-  height: auto;
+  height: 1000px;
   min-height: 100px;
   overflow-y: auto;
   width: 90%;
