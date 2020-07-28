@@ -62,14 +62,10 @@ public class DataServlet extends HttpServlet {
     return formattedComments.toString();
   }
 
-  private StringBuilder formatComment(final Entity comment) {
-    StringBuilder formattedComment = new StringBuilder();
-
-    formattedComment.append("<div class=\"comment\">").append("<h6 class=\"comment-username\">")
-                    .append(comment.getProperty("username")).append(" said at ")
-                    .append(comment.getProperty("timestamp")).append(":</h6>")
-                    .append(comment.getProperty("body")).append("</div>");
-
-    return formattedComment;
+  private String formatComment(final Entity comment) {
+    return "<div class=\"comment\">" + "<h6 class=\"comment-username\">" +
+           comment.getProperty("username") + " said at " +
+           comment.getProperty("timestamp") + ":</h6>" +
+           comment.getProperty("body") + "</div>";
   }
 }
