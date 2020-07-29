@@ -38,8 +38,9 @@ public class CommentStorage {
     storage = DatastoreServiceFactory.getDatastoreService();
   }
 
-  /** If the entity id doesn't have a numeric format or is not
-   * within (0, IMG_COUNT], the request will be ignored.
+  /** 
+   * If the entity id doesn't have a numeric format or is not within (0, IMG_COUNT],
+   * the request will be ignored.
    */
   public void addStorageEntry(final String username, final String body,
                               final String id,       final String entity) {
@@ -62,8 +63,8 @@ public class CommentStorage {
     }
   }
 
-  /** If the entity id doesn't have a numeric format or is not
-   * within (0, IMG_COUNT], returns null.
+  /** 
+   * If the entity id doesn't have a numeric format or is not within (0, IMG_COUNT], returns null.
    */
   public Iterable<Entity> getStorageEntries(final String keyword, final String id) {
     int idx;
