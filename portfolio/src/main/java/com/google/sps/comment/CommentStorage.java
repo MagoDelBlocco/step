@@ -26,7 +26,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.lang.NumberFormatException;
 
-/** Wrapper over Datastore. Allows for safe adding and retrieval of entities, requiring
+/** 
+ * Wrapper over Datastore. Allows for safe adding and retrieval of entities, requiring
  * a specific format, all fields as Strings: [author name], [entity body], [entity name],
  * entity's section id.
  */

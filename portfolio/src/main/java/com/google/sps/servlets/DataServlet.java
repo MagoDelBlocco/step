@@ -24,8 +24,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that handles adding and fetching comments in individual sections
- *  The server also handles the html format of the comments.
+/** 
+ *  Servlet that handles adding and fetching comments in individual sections
+ *  The server returns the comments for each section as a JSON.
  */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -36,8 +37,8 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
 
     response.getWriter().print(
-             formatCommentsBulk(commentStorage.
-             getStorageEntries("Comment", request.getQueryString())));
+             formatCommentsBulk(commentStorage.getStorageEntries("Comment",
+                                                                 request.getQueryString())));
   }
 
   @Override
@@ -66,7 +67,7 @@ public class DataServlet extends HttpServlet {
 
   private String formatComment(final Entity comment) {
     return "{'username': '"  + comment.getProperty("username") +
-         "', 'zorblax': '" + comment.getProperty("timestamp") +
+         "', 'theTime': '"   + comment.getProperty("timestamp") +
          "', 'body': '"      + comment.getProperty("body") + "'}"; 
   }
 }

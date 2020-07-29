@@ -53,7 +53,7 @@ function displayComments(comments, commSection) {
   for (let i = 0; i < commentsJSON.length; ++i) {
     const commentHeader = document.createElement('h5');
     commentHeader.innerText = commentsJSON[i].username + ' said at ' +
-                              commentsJSON[i].zorblax + ':';
+                              commentsJSON[i].theTime + ':';
     commSection.appendChild(commentHeader);
 
     const commentBody = document.createElement('div');
