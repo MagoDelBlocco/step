@@ -14,19 +14,60 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.comment.CommentStorage;
+import com.google.sps.config.Constants;
+import com.google.appengine.api.datastore.Entity;
+import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** 
+ *  Servlet that handles adding and fetching comments in individual sections
+ *  The server returns the comments for each section as a JSON.
+ */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
+  private CommentStorage commentStorage = new CommentStorage();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Step 1 done!</h1>");
+
+    response.getWriter().print(
+             formatCommentsBulk(commentStorage.getStorageEntries("Comment",
+                                                                 request.getQueryString())));
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    commentStorage.addStorageEntry(request.getParameter("username"),
+                                   request.getParameter("comment"),
+                                   request.getParameter("image-id"),
+                                   "Comment");
+  }
+
+  private String formatCommentsBulk(final Iterable<Entity> comments) {
+    if (comments == null) {
+      return Constants.INVALID_ID;
+    }
+
+    StringBuilder formattedComments = new StringBuilder("[");
+
+    for (Entity it : comments) {
+      formattedComments.append(formatComment(it)).append(",");
+    }
+
+    formattedComments.append("]");
+
+    return formattedComments.toString();
+  }
+
+  private String formatComment(final Entity comment) {
+    return "{'username': '"  + comment.getProperty("username") +
+         "', 'theTime': '"   + comment.getProperty("timestamp") +
+         "', 'body': '"      + comment.getProperty("body") + "'}"; 
   }
 }

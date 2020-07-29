@@ -36,6 +36,39 @@
   width: 800px;
 }
 
+#comment-section {
+  background: #eee center;
+  display: flex;
+  flex-direction: column;
+  height: 1000px;
+  min-height: 100px;
+  overflow-y: auto;
+  width: 90%;
+}
+
+#comm-body {
+  height: auto;
+  margin: 0 0 0 25px;
+  min-height: 40px;
+  width: 500px;
+}
+
+#comm-body-label {
+  margin: 10px 0 0 25px;
+}
+
+#comm-username {
+  margin: 0 0 0 25px;
+}
+
+#comm-username-label {
+  margin: 10px 0 0 25px;
+}
+
+#image-id {
+  display: none;
+}
+
 #bar1,
 #bar2,
 #bar3 {
@@ -77,6 +110,10 @@
   padding: 10px 0;
   text-align: center;
   width: 80%;
+}
+
+#focus-image-index {
+  font: 0;
 }
 
 #modal {
@@ -232,6 +269,10 @@ input[type=checkbox] {
 
 .titlecard {
   font: small-caps bold 32px/1 Arial, Helvetica, sans-serif;
+}
+
+.invisible {
+  display: none;
 }
 
 .visible {

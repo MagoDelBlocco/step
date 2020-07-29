@@ -23,21 +23,53 @@ function navtoggle() {
   document.getElementById('navmenu').classList.toggle('visible');
 }
 
-function openModal(target, index) {
+async function openModal(target, index) {
   const modal = document.getElementById('modal');
 
   modal.style.display = 'block';
   
   const image = document.getElementById('focus-image');
   const caption = document.getElementById('focus-image-caption');
-  const commSection = document.getElementById('comment-section');
+  const imageID = document.getElementById('image-id');
 
   image.src = target.src;
   caption.innerHTML = target.alt;
+  imageID.value = index;
+
+  const params = new URLSearchParams();
+  params.append('id', index);
+
+  const response = await fetch('/data?' + index, {
+                                                   method: 'GET'
+  });
+  const comments = await response.text();
+  
+  displayComments(comments, document.getElementById('previous-comments'));
+}
+
+function displayComments(comments, commSection) {
+  const commentsJSON = eval(comments);
+
+  for (let i = 0; i < commentsJSON.length; ++i) {
+    const commentHeader = document.createElement('h5');
+    commentHeader.innerText = commentsJSON[i].username + ' said at ' +
+                              commentsJSON[i].theTime + ':';
+    commSection.appendChild(commentHeader);
+
+    const commentBody = document.createElement('div');
+    commentBody.innerText = commentsJSON[i].body;
+    commSection.appendChild(commentBody);
+  }
 }
 
 function closeModal() {
   const modal = document.getElementById('modal');
 
   modal.style.display = 'none';
+}
+
+function submitComment() {
+  document.forms['comment-form'].submit();
+
+  location.reload();
 }
