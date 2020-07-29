@@ -15,9 +15,68 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import com.google.sps.TimeRange;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    Collection<TimeRange> timeTable =
+                                            registerRelevantEvents(events,
+                                                                   request.getAttendees());
+
+    return searchSuitableSlots(timeTable, request.getDuration());
+  }
+
+  private Collection<TimeRange>
+              registerRelevantEvents(final Collection<Event> events,
+                                     final Collection<String> invited) {
+    Collection<TimeRange> timeTable = new LinkedList<>();
+    timeTable.add(TimeRange.WHOLE_DAY);
+
+    for (Event event : events) {
+      if (relevantEvent(event, invited)) {
+        timeTable = splitTimeTable(timeTable, event.getWhen());
+      }
+    }
+
+    return timeTable;
+  }
+
+  private Boolean relevantEvent(final Event event, final Collection<String> crucialPeople) {
+    for (String crucialPerson : crucialPeople) {
+      if (event.getAttendees().contains(crucialPerson)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  private Collection<TimeRange>
+              splitTimeTable(final Collection<TimeRange> originalTimeTable,
+                             final TimeRange splittingTime) {
+    /** 
+     *  TODO: splits the timetable like this:
+     *  originalTimeTable: [---------------------------]
+     *  splitter:                       [----]
+     *  returns:           [------------]    [---------]
+     *  !!! USE TIMERANGE METHODS FOR OVERLAPPING
+     */
+
+     return originalTimeTable;
+  }
+
+  private Collection<TimeRange>
+              searchSuitableSlots(final Collection<TimeRange> timeTable,
+                                  final long duration) {
+    Collection<TimeRange> suitableSlots = new LinkedList<>();
+
+    for (TimeRange emptySlot : timeTable) {
+      if (emptySlot.duration() >= duration) {
+        suitableSlots.add(emptySlot);
+      }
+    }
+
+    return suitableSlots;
   }
 }
