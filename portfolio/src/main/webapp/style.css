@@ -79,6 +79,19 @@
   width: 35px;
 }
 
+
+.changed #bar1 {
+  transform: rotate(-45deg) translate(-7px, 7px);
+}
+
+.changed #bar2 {
+  opacity: 0;
+}
+
+.changed #bar3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
 #close-button {
   color: #999;
   font: 100px bold;
