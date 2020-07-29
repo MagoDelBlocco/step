@@ -80,7 +80,7 @@
 }
 
 #close-button {
-  color: #eee;
+  color: #999;
   font: 100px bold;
   position: -webkit-sticky;
   position: sticky;
@@ -89,7 +89,7 @@
 }
 
 #close-button:hover {
-  color: #bbb;
+  color: #555;
   cursor: pointer;
 }
 

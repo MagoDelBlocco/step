@@ -21,6 +21,7 @@ function expandCollapsible(element) {
 
 function navtoggle() {
   document.getElementById('navmenu').classList.toggle('visible');
+  
 }
 
 async function openModal(target, index) {
