@@ -19,8 +19,9 @@ function expandCollapsible(element) {
                                                       content.scrollHeight + 'px';
 }
 
-function navtoggle() {
+function navtoggle(element) {
   document.getElementById('navmenu').classList.toggle('visible');
+  element.classList.toggle('changed');
 }
 
 async function openModal(target, index) {
