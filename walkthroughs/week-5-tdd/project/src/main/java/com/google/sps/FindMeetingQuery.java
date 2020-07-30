@@ -14,28 +14,44 @@
 
 package com.google.sps;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import com.google.sps.TimeRange;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<TimeRange> timeTable =
-                                            registerRelevantEvents(events,
-                                                                   request.getAttendees());
+    List<TimeRange> timeTable = registerRelevantEvents(events, request.getAttendees());
 
     return searchSuitableSlots(timeTable, request.getDuration());
   }
 
-  private Collection<TimeRange>
-              registerRelevantEvents(final Collection<Event> events,
-                                     final Collection<String> invited) {
-    Collection<TimeRange> timeTable = new LinkedList<>();
+  private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
+                                                    final long duration) {
+    Collection<TimeRange> suitableSlots = new LinkedList<>();
+
+    for (TimeRange emptySlot : timeTable) {
+      if (emptySlot.duration() >= duration) {
+        suitableSlots.add(emptySlot);
+      }
+    }
+
+    return suitableSlots;
+  }
+
+  private List<TimeRange> registerRelevantEvents(final Collection<Event> events,
+                                                 final Collection<String> invited) {
+    /**
+     * The timeTable collection holds TimeRanges which represent empty time slots for
+     * all the people invited
+     */
+    List<TimeRange> timeTable = new ArrayList<>();
     timeTable.add(TimeRange.WHOLE_DAY);
 
     for (Event event : events) {
       if (relevantEvent(event, invited)) {
-        timeTable = splitTimeTable(timeTable, event.getWhen());
+        splitTimeTable(timeTable, event.getWhen());
       }
     }
 
@@ -52,31 +68,75 @@ public final class FindMeetingQuery {
     return false;
   }
 
-  private Collection<TimeRange>
-              splitTimeTable(final Collection<TimeRange> originalTimeTable,
-                             final TimeRange splittingTime) {
-    /** 
-     *  TODO: splits the timetable like this:
-     *  originalTimeTable: [---------------------------]
-     *  splitter:                       [----]
-     *  returns:           [------------]    [---------]
-     *  !!! USE TIMERANGE METHODS FOR OVERLAPPING
+  private void splitTimeTable(final List<TimeRange> originalTimeTable,
+                              final TimeRange timeSplitter) {
+    /**
+     * Possible cases:
+     * 1. originalTimeTable:  [--------------------------]
+     *    splitter:                     [-----]
+     *    result:             [---------]     [----------]
+     *
+     * 2. originalTimeTable:  [------]   ...   [---------]
+     *    splitter:                [-------------]
+     *    result:             [----]             [-------]
+     *
+     * 3. originalTimeTable:  [------]   ...  [----------]
+     *    splitter:                     [-----]
+     *    result:             [------]        [----------]
+     *
+     * 4. originalTimeTable:  [------]           [-------]
+     *    splitter:                     [-----]
+     *    result:             [------]           [-------]
+     *
+     * Mention: for this method, it will only matter if the splitter is contained or not
      */
+    int firstRelevantTimeslotIdx = TimeRange.lowerBound(originalTimeTable, timeSplitter);
 
-     return originalTimeTable;
+    if (originalTimeTable.get(firstRelevantTimeslotIdx).contains(timeSplitter)) {  // Case 1
+      splitAtTimeslot(originalTimeTable, timeSplitter, firstRelevantTimeslotIdx);
+    } else {  // Case 2, 3, 4
+      modifyOverlappingSlots(originalTimeTable, timeSplitter, firstRelevantTimeslotIdx);
+    }
   }
 
-  private Collection<TimeRange>
-              searchSuitableSlots(final Collection<TimeRange> timeTable,
-                                  final long duration) {
-    Collection<TimeRange> suitableSlots = new LinkedList<>();
+  private void splitAtTimeslot(final List<TimeRange> timeTable, final TimeRange splitter,
+                                                                final int splitIdx) {
+    TimeRange originalSlot = timeTable.remove(splitIdx);
 
-    for (TimeRange emptySlot : timeTable) {
-      if (emptySlot.duration() >= duration) {
-        suitableSlots.add(emptySlot);
+    if (originalSlot.end() > splitter.end()) {
+      timeTable.add(splitIdx,
+                    TimeRange.fromStartEnd(splitter.end(), originalSlot.end(), false));
+    }
+    
+    if (originalSlot.start() < splitter.start()) {
+      timeTable.add(splitIdx,
+                    TimeRange.fromStartEnd(originalSlot.start(), splitter.start(), false));
+    }
+  }
+
+  private void modifyOverlappingSlots(final List<TimeRange> timeTable, final TimeRange overlapper,
+                                                                       int overlapIdx) {
+    TimeRange aux;
+
+    if (timeTable.get(overlapIdx).overlaps(overlapper)) {
+      aux = timeTable.remove(overlapIdx);
+      --overlapIdx;
+
+      if (aux.start() < overlapper.start()) {
+        timeTable.add(++overlapIdx, TimeRange.fromStartEnd(aux.start(), overlapper.start(), false));
       }
+    } else {
+      ++overlapIdx;
     }
 
-    return suitableSlots;
+    for (; overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx));) {
+      timeTable.remove(overlapIdx);
+    }
+
+    if (overlapIdx < timeTable.size() && timeTable.get(overlapIdx).overlaps(overlapper)) {
+      aux = timeTable.remove(overlapIdx);
+
+      timeTable.add(overlapIdx, TimeRange.fromStartEnd(overlapper.end(), aux.end(), false));
+    }
   }
 }

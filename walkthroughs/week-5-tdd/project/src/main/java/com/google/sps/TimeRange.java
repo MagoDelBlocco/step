@@ -14,6 +14,7 @@
 
 package com.google.sps;
 
+import java.util.List;
 import java.util.Comparator;
 
 /**
@@ -182,5 +183,29 @@ public final class TimeRange {
    */
   public static TimeRange fromStartDuration(int start, int duration) {
     return new TimeRange(start, duration);
+  }
+
+  /**
+   * Uses a branchless binary search to find the first element in a TimeRange @param collection
+   * that potentially overlaps with the @param target
+   */
+  public static int lowerBound(final List<TimeRange> collection, final TimeRange target) {
+    int lowerBoundPosition = 0;
+
+    for (int pace = maxPossiblePace(collection.size()); pace > 0; pace >>= 1) {
+      if (pace + lowerBoundPosition < collection.size()) {
+        lowerBoundPosition += pace * (collection.get(lowerBoundPosition + pace).start() <=
+                                      target.start() ? 1 : 0);
+      }
+    }
+
+    return lowerBoundPosition;
+  }
+
+  /**
+   * Finds the biggest power of 2 closest to the @param length 2 ^ [log_2(n)]
+   */
+  private static int maxPossiblePace(final int length) {
+    return (int)Math.pow(2, (int)(Math.log(length) / Math.log(2)));  
   }
 }
