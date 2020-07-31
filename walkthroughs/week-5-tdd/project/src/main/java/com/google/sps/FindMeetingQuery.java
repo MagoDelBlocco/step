@@ -111,6 +111,9 @@ public final class FindMeetingQuery {
      *
      * Mention: for this method, it will only matter if the splitter is contained or not
      */
+    if (originalTimeTable.isEmpty()) {
+      return;
+    }
     int firstRelevantTimeslotIdx = TimeRange.lowerBound(originalTimeTable, timeSplitter);
 
     if (originalTimeTable.get(firstRelevantTimeslotIdx).contains(timeSplitter)) {  // Case 1
