@@ -20,20 +20,24 @@ import java.util.Collection;
 import java.util.LinkedList;
 import com.google.sps.TimeRange;
 
+/**
+ *  This class exposes the {@code query} method, which finds available time slots
+ * for a meeting with a list of mandatory and optional attendees.
+ */
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     TimeTablePair timeTablePair = registerRelevantEvents(events, request.getAttendees(),
                                                                  request.getOptionalAttendees());
-    List<TimeRange> timeTable = timeTablePair.getFirst();
-    List<TimeRange> optionalTimeTable = timeTablePair.getSecond();
+    List<TimeRange> mandatoryTimeTable = timeTablePair.getFirst();
+    List<TimeRange> optionalAndMandatoryTimeTable = timeTablePair.getSecond();
 
-    Collection<TimeRange> mandatoryTimeTable =
-                              searchSuitableSlots(timeTable, request.getDuration());
-    Collection<TimeRange> mandatoryAndOptionalTimeTable =
-                              searchSuitableSlots(optionalTimeTable, request.getDuration());
+    Collection<TimeRange> mandatory = searchSuitableSlots(mandatoryTimeTable,
+                                                          request.getDuration());
+    Collection<TimeRange> mandatoryAndOptional = searchSuitableSlots(optionalAndMandatoryTimeTable,
+                                                                     request.getDuration());
     
-    return mandatoryAndOptionalTimeTable.isEmpty() ?
-           mandatoryAndOptionalTimeTable : mandatoryAndOptionalTimeTable;
+    return mandatoryAndOptional.isEmpty() ?
+           mandatory : mandatoryAndOptional;
   }
 
   private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
