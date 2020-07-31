@@ -22,9 +22,18 @@ import com.google.sps.TimeRange;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    List<TimeRange> timeTable = registerRelevantEvents(events, request.getAttendees());
+    TimeTablePair timeTablePair = registerRelevantEvents(events, request.getAttendees(),
+                                                                 request.getOptionalAttendees());
+    List<TimeRange> timeTable = timeTablePair.getFirst();
+    List<TimeRange> optionalTimeTable = timeTablePair.getSecond();
 
-    return searchSuitableSlots(timeTable, request.getDuration());
+    Collection<TimeRange> mandatoryTimeTable =
+                              searchSuitableSlots(timeTable, request.getDuration());
+    Collection<TimeRange> mandatoryAndOptionalTimeTable =
+                              searchSuitableSlots(optionalTimeTable, request.getDuration());
+    
+    return mandatoryAndOptionalTimeTable.isEmpty() ?
+           mandatoryTimeTable : mandatoryAndOptionalTimeTable;
   }
 
   private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
@@ -40,27 +49,35 @@ public final class FindMeetingQuery {
     return suitableSlots;
   }
 
-  private List<TimeRange> registerRelevantEvents(final Collection<Event> events,
-                                                 final Collection<String> invited) {
+  private TimeTablePair registerRelevantEvents(final Collection<Event> events,
+                                                 final Collection<String> mandatoryAttendees,
+                                                 final Collection<String> optionalAttendees) {
     /**
      * The timeTable collection holds TimeRanges which represent empty time slots for
      * all the people invited
      */
     List<TimeRange> timeTable = new ArrayList<>();
+    List<TimeRange> optionalTimeTable = new ArrayList<>();
     timeTable.add(TimeRange.WHOLE_DAY);
+    optionalTimeTable.add(TimeRange.WHOLE_DAY);
 
     for (Event event : events) {
-      if (relevantEvent(event, invited)) {
+      if (relevantEvent(event, mandatoryAttendees)) {
         splitTimeTable(timeTable, event.getWhen());
+        splitTimeTable(optionalTimeTable, event.getWhen());
+      }
+
+      if (relevantEvent(event, optionalAttendees)) {
+        splitTimeTable(optionalTimeTable, event.getWhen());
       }
     }
 
-    return timeTable;
+    return new TimeTablePair(timeTable, optionalTimeTable);
   }
 
-  private Boolean relevantEvent(final Event event, final Collection<String> crucialPeople) {
-    for (String crucialPerson : crucialPeople) {
-      if (event.getAttendees().contains(crucialPerson)) {
+  private Boolean relevantEvent(final Event event, final Collection<String> relevantPeople) {
+    for (String person : relevantPeople) {
+      if (event.getAttendees().contains(person)) {
         return true;
       }
     }
@@ -138,5 +155,23 @@ public final class FindMeetingQuery {
 
       timeTable.add(overlapIdx, TimeRange.fromStartEnd(overlapper.end(), aux.end(), false));
     }
+  }
+}
+
+final class TimeTablePair {
+  private List<TimeRange> first;
+  private List<TimeRange> second;
+
+  TimeTablePair(final List<TimeRange> first, final List<TimeRange> second) {
+    this.first = first;
+    this.second = second;
+  }
+
+  List<TimeRange> getFirst() {
+    return first;
+  }
+
+  List<TimeRange> getSecond() {
+    return second;
   }
 }
