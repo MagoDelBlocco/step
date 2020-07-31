@@ -54,8 +54,8 @@ public final class FindMeetingQuery {
   }
 
   private TimeTablePair registerRelevantEvents(final Collection<Event> events,
-                                                 final Collection<String> mandatoryAttendees,
-                                                 final Collection<String> optionalAttendees) {
+                                               final Collection<String> mandatoryAttendees,
+                                               final Collection<String> optionalAttendees) {
     /**
      * The timeTable collection holds TimeRanges which represent empty time slots for
      * all the people invited
