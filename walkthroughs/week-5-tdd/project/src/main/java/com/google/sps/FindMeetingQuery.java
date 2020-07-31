@@ -33,7 +33,7 @@ public final class FindMeetingQuery {
                               searchSuitableSlots(optionalTimeTable, request.getDuration());
     
     return mandatoryAndOptionalTimeTable.isEmpty() ?
-           mandatoryTimeTable : mandatoryAndOptionalTimeTable;
+           mandatoryAndOptionalTimeTable : mandatoryAndOptionalTimeTable;
   }
 
   private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
