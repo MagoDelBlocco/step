@@ -19,6 +19,8 @@ This repo contains Bogdan Ciobanu's portfolio and STEP projects.
 
 #### Walkthroughs for building a similar app
 
+#### A meeting scheduling web app, with support for mandatory and optional attendees
+
 ## How to use
 
 #### Running the website
