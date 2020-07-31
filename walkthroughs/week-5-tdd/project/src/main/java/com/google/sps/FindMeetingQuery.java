@@ -144,14 +144,14 @@ public final class FindMeetingQuery {
 
     if (timeTable.get(overlapIdx).overlaps(overlapper)) {
       aux = timeTable.remove(overlapIdx);
-      --overlapIdx;
 
       if (aux.start() < overlapper.start()) {
-        timeTable.add(++overlapIdx, TimeRange.fromStartEnd(aux.start(), overlapper.start(), false));
+        timeTable.add(overlapIdx, TimeRange.fromStartEnd(aux.start(), overlapper.start(), false));
+      } else {  // timeTable[overlapIdx] already is the next element
+        --overlapIdx;
       }
-    } else {
-      ++overlapIdx;
     }
+    ++overlapIdx;
 
     for (; overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx));) {
       timeTable.remove(overlapIdx);
