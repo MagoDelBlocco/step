@@ -21,7 +21,7 @@ import java.util.LinkedList;
 import com.google.sps.TimeRange;
 
 /**
- *  This class exposes the {@code query} method, which finds available time slots
+ * This class exposes the {@code query} method, which finds available time slots
  * for a meeting with a list of mandatory and optional attendees.
  */
 public final class FindMeetingQuery {
