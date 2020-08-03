@@ -31,13 +31,11 @@ public final class FindMeetingQuery {
     List<TimeRange> mandatoryTimeTable = timeTablePair.getFirst();
     List<TimeRange> optionalAndMandatoryTimeTable = timeTablePair.getSecond();
 
-    Collection<TimeRange> mandatory = searchSuitableSlots(mandatoryTimeTable,
-                                                          request.getDuration());
     Collection<TimeRange> mandatoryAndOptional = searchSuitableSlots(optionalAndMandatoryTimeTable,
                                                                      request.getDuration());
     
     return mandatoryAndOptional.isEmpty() ?
-           mandatory : mandatoryAndOptional;
+           searchSuitableSlots(mandatoryTimeTable, request.getDuration()) : mandatoryAndOptional;
   }
 
   private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
