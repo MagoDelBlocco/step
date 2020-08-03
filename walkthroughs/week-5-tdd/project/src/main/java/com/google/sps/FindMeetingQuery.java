@@ -136,6 +136,11 @@ public final class FindMeetingQuery {
     }
   }
 
+  /**
+   * This method handles cases 2, 3, and 4, where the occupied slot may or may not modify
+   * the last closest slot that starts before it, contain a number of consecutive slots
+   * after it, and may or may not modify the first slot that ends after it. 
+   */
   private void modifyOverlappingSlots(final List<TimeRange> timeTable, final TimeRange overlapper,
                                                                        int overlapIdx) {
     TimeRange aux;
