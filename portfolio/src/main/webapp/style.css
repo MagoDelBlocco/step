@@ -3,7 +3,7 @@
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 15px;
+  font: 15px;
   outline: none;
   padding: 18px;
   text-align: left;
@@ -31,8 +31,7 @@
 }
 
 #projects-content {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 0 auto;
   width: 800px;
 }
 
@@ -72,7 +71,7 @@
 #bar1,
 #bar2,
 #bar3 {
-  background-color: black;
+  background: black;
   height: 5px;
   margin: 6px 0;
   transition: .2s;
@@ -95,7 +94,6 @@
 #close-button {
   color: #999;
   font: 100px bold;
-  position: -webkit-sticky;
   position: sticky;
   text-align: right;
   top: 10px;
@@ -166,7 +164,7 @@
 }
 
 .galleryelement img {
-  margin-top: 8px;
+  margin: 8px 0 0 0;
   transition: transform .5s ease;
   vertical-align: middle;
   width: 100%;
@@ -240,7 +238,7 @@
 }
 
 #greeting-container {
-  margin-top: 20px;
+  margin: 20px 0 0 0;
 }
 
 input[type=checkbox] {
@@ -258,7 +256,7 @@ input[type=checkbox] {
 
 .main-text {
   background: #eee;
-  font-size: 20px;
+  font: 20px;
   height: auto;
   padding: 0 50px 0 50px;
   width: auto;
@@ -269,9 +267,8 @@ input[type=checkbox] {
 }
 
 .sections {
-  background-color: #777;
+  background: #777;
   height: 70px;
-  position: -webkit-sticky;
   position: sticky;
   width: 100%;
 }
