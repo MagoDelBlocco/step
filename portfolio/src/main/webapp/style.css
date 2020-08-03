@@ -1,38 +1,209 @@
-.collapsible {
-  background: #777;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font: 15px;
-  outline: none;
-  padding: 18px;
-  text-align: left;
-  width: 100%;
-}
-
-.collapsible-content {
-  background: #eee;
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 18px;
-  transition: max-height .2s ease-out;
-}
-
-.collapsible:hover {
-  background: #555;
-}
-
+/**
+ * Shared
+ */
 .centered-text {
   text-align: center;
 }
 
-#projects {
-  background: #eee;
+#bar1,
+#bar2,
+#bar3 {
+  background: black;
+  height: 5px;
+  margin: 6px 0;
+  transition: .2s;
+  width: 35px;
 }
 
-#projects-content {
-  margin: 0 auto 0 auto;
-  width: 800px;
+.changed #bar1 {
+  transform: rotate(-45deg) translate(-7px, 7px);
+}
+
+.changed #bar2 {
+  opacity: 0;
+}
+
+.changed #bar3 {
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.dropdown {
+  cursor: pointer;
+  display: inline-block;
+  position: fixed;
+  z-index: 2;
+}
+
+.dropdown_content {
+  background: #aaa;
+  display: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.dropdown_content a {
+  color: black;
+  display: block;
+  font: 20px/1 Arial, Helvetica, sans-serif;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+
+.dropdown_content a:hover {
+  background: #777;
+  transition: .1s ease-out;
+}
+
+#navmenu-current-location {
+  background: #777;
+}
+
+#navmenu {
+  width: 200px;
+}
+
+.titlecard {
+  font: small-caps bold 32px/1 Arial, Helvetica, sans-serif;
+}
+
+.invisible {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+
+.no-margin {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.no-margin-top {
+  margin-block-start: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+/**
+ * Main
+ */
+#frontcard {
+  background: rgba(0, 0, 0, .1);
+  height: 500px;
+  width: 100%;
+}
+
+#front-text {
+  backdrop-filter: blur(2px);
+  bottom: 40%;
+  font-size: 40px;
+  height: 80px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+}
+
+#greeting-container {
+  margin: 20px 0 0 0;
+}
+
+#whoami {
+  top: 0;
+}
+
+#mybackground {
+  top: 70px;
+}
+
+#interests {
+  top: 140px;
+}
+
+#funfacts {
+  top: 210px;
+}
+
+#contact {
+  top: 280px;
+}
+
+#main-content {
+  background: url("./images/code.png") top/cover no-repeat fixed;
+  min-height: 500px;
+}
+
+.main-text {
+  background: #eee;
+  font-size: 20px;
+  height: auto;
+  padding: 0 50px 0 50px;
+  width: auto;
+}
+
+.sections {
+  background: #777;
+  height: 70px;
+  margin: 0;
+  position: sticky;
+  width: 100%;
+}
+
+.sections h1 {
+  font: small-caps bold 30px/1 Arial, Helvetica, sans-serif;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+/**
+ * Cat
+ */
+#gallery {
+  background: url('../images/paws_background.jpg') right top/1000px 1600px repeat-y,
+              linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
+}
+
+#gallery-text {
+  font: 16px/1 Arial, Helvetica, sans-serif;
+}
+
+#gallery-title {
+  font: small-caps bold 20px/1 Arial, Helvetica, sans-serif;
+}
+
+.gallerycolumn {
+  flex: 30%;
+  max-width: 30%;
+  padding: 0 4px;
+}
+
+.galleryelement img {
+  margin: 8px 0 0 0;
+  transition: transform .5s ease;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.galleryelement:hover img {
+  opacity: .75;
+}
+
+.galleryrow {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
 }
 
 #comment-section {
@@ -66,29 +237,6 @@
 
 #image-id {
   display: none;
-}
-
-#bar1,
-#bar2,
-#bar3 {
-  background: black;
-  height: 5px;
-  margin: 6px 0;
-  transition: .2s;
-  width: 35px;
-}
-
-
-.changed #bar1 {
-  transform: rotate(-45deg) translate(-7px, 7px);
-}
-
-.changed #bar2 {
-  opacity: 0;
-}
-
-.changed #bar3 {
-  transform: rotate(45deg) translate(-8px, -8px);
 }
 
 #close-button {
@@ -140,155 +288,38 @@
   z-index: 1;
 }
 
-#contact {
-  top: 280px;
-}
-
-#gallery {
-  background: url('../images/paws_background.jpg') right top/1000px 1600px repeat-y,
-              linear-gradient(to right, #cf680e, white, white, white, white, white), center/100% no-repeat;
-}
-
-#gallery-text {
-  font: 16px/1 Arial, Helvetica, sans-serif;
-}
-
-#gallery-title {
-  font: small-caps bold 20px/1 Arial, Helvetica, sans-serif;
-}
-
-.gallerycolumn {
-  flex: 30%;
-  max-width: 30%;
-  padding: 0 4px;
-}
-
-.galleryelement img {
-  margin: 8px 0 0 0;
-  transition: transform .5s ease;
-  vertical-align: middle;
-  width: 100%;
-}
-
-.galleryelement:hover img {
-  opacity: .75;
-}
-
-.galleryrow {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-.dropdown {
+/**
+ * Projects
+ */
+.collapsible {
+  background: #777;
+  border: none;
+  color: white;
   cursor: pointer;
-  display: inline-block;
-  position: fixed;
-  z-index: 2;
-}
-
-.dropdown_content {
-  background: #aaa;
-  display: none;
-  position: absolute;
-  z-index: 2;
-}
-
-.dropdown_content a {
-  color: black;
-  display: block;
-  font: 20px/1 Arial, Helvetica, sans-serif;
-  padding: 12px 16px;
-  text-decoration: none;
-}
-
-.dropdown_content a:hover {
-  background: #777;
-  transition: .1s ease-out;
-}
-
-#navmenu-current-location {
-  background: #777;
-}
-
-#navmenu {
-  width: 200px;
-}
-
-#frontcard {
-  background: rgba(0, 0, 0, .1);
-  height: 500px;
+  font: 15px;
+  outline: none;
+  padding: 18px;
+  text-align: left;
   width: 100%;
 }
 
-#front-text {
-  backdrop-filter: blur(2px);
-  bottom: 40%;
-  height: 70px;
-  left: 0;
-  margin: auto;
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 50%;
-}
-
-#funfacts {
-  top: 210px;
-}
-
-#greeting-container {
-  margin: 20px 0 0 0;
-}
-
-input[type=checkbox] {
-  display: none;
-}
-
-#interests {
-  top: 140px;
-}
-
-#main-content {
-  background: url("./images/code.png") top/cover no-repeat fixed;
-  min-height: 500px;
-}
-
-.main-text {
+.collapsible-content {
   background: #eee;
-  font: 20px;
-  height: auto;
-  padding: 0 50px 0 50px;
-  width: auto;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 18px;
+  transition: max-height .2s ease-out;
 }
 
-#mybackground {
-  top: 70px;
+.collapsible:hover {
+  background: #555;
 }
 
-.sections {
-  background: #777;
-  height: 70px;
-  position: sticky;
-  width: 100%;
+#projects {
+  background: #eee;
 }
 
-.sections h1 {
-  font: small-caps bold 30px/1 Arial, Helvetica, sans-serif;
-}
-
-.titlecard {
-  font: small-caps bold 32px/1 Arial, Helvetica, sans-serif;
-}
-
-.invisible {
-  display: none;
-}
-
-.visible {
-  display: block;
-}
-
-#whoami {
-  top: 0;
+#projects-content {
+  margin: 0 auto 0 auto;
+  width: 800px;
 }
