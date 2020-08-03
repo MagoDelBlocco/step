@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-/** */
 @RunWith(JUnit4.class)
 public final class FindMeetingQueryTest {
   private static final Collection<Event> NO_EVENTS = Collections.emptySet();
@@ -100,12 +99,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void everyAttendeeIsConsidered() {
-    // Have each person have different events. We should see three options because each person has
-    // split the restricted times.
-    //
-    // Events  :       |--A--|     |--B--|
-    // Day     : |-----------------------------|
-    // Options : |--1--|     |--2--|     |--3--|
+    /**
+     * Have each person have different events. We should see three options because each person has
+     * split the restricted times.
+     *
+     * Events  :       |--A--|     |--B--|
+     * Day     : |-----------------------------|
+     * Options : |--1--|     |--2--|     |--3--|
+     */
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
@@ -127,13 +128,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void overlappingEvents() {
-    // Have an event for each person, but have their events overlap. We should only see two options.
-    //
-    // Events  :       |--A--|
-    //                     |--B--|
-    // Day     : |---------------------|
-    // Options : |--1--|         |--2--|
-
+    /**
+     * Have an event for each person, but have their events overlap. We should only see two options.
+     *
+     * Events  :       |--A--|
+     *                     |--B--|
+     * Day     : |---------------------|
+     * Options : |--1--|         |--2--|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0830AM, DURATION_60_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -153,14 +155,15 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void nestedEvents() {
-    // Have an event for each person, but have one person's event fully contain another's event. We
-    // should see two options.
-    //
-    // Events  :       |----A----|
-    //                   |--B--|
-    // Day     : |---------------------|
-    // Options : |--1--|         |--2--|
-
+    /**
+     * Have an event for each person, but have one person's event fully contain another's event. We
+     * should see two options.
+     *
+     * Events  :       |----A----|
+     *                   |--B--|
+     * Day     : |---------------------|
+     * Options : |--1--|         |--2--|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0830AM, DURATION_90_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -180,13 +183,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void doubleBookedPeople() {
-    // Have one person, but have them registered to attend two events at the same time.
-    //
-    // Events  :       |----A----|
-    //                     |--A--|
-    // Day     : |---------------------|
-    // Options : |--1--|         |--2--|
-
+    /**
+     * Have one person, but have them registered to attend two events at the same time.
+     *
+     * Events  :       |----A----|
+     *                     |--A--|
+     * Day     : |---------------------|
+     * Options : |--1--|         |--2--|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0830AM, DURATION_60_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -205,13 +209,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void justEnoughRoom() {
-    // Have one person, but make it so that there is just enough room at one point in the day to
-    // have the meeting.
-    //
-    // Events  : |--A--|     |----A----|
-    // Day     : |---------------------|
-    // Options :       |-----|
-
+    /**
+     * Have one person, but make it so that there is just enough room at one point in the day to
+     * have the meeting.
+     *
+     * Events  : |--A--|     |----A----|
+     * Day     : |---------------------|
+     * Options :       |-----|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             Arrays.asList(PERSON_A)),
@@ -229,8 +234,10 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void ignoresPeopleNotAttending() {
-    // Add an event, but make the only attendee someone different from the person looking to book
-    // a meeting. This event should not affect the booking.
+    /**
+     * Add an event, but make the only attendee someone different from the person looking to book
+     * a meeting. This event should not affect the booking.
+     */
     Collection<Event> events = Arrays.asList(new Event("Event 1",
         TimeRange.fromStartDuration(TIME_0900AM, DURATION_30_MINUTES), Arrays.asList(PERSON_A)));
     MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_B), DURATION_30_MINUTES);
@@ -254,13 +261,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void notEnoughRoom() {
-    // Have one person, but make it so that there is not enough room at any point in the day to
-    // have the meeting.
-    //
-    // Events  : |--A-----| |-----A----|
-    // Day     : |---------------------|
-    // Options :
-
+    /**
+     * Have one person, but make it so that there is not enough room at any point in the day to
+     * have the meeting.
+     *
+     * Events  : |--A-----| |-----A----|
+     * Day     : |---------------------|
+     * Options :
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             Arrays.asList(PERSON_A)),
@@ -277,14 +285,15 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void optionalAttendeeNotAvailable() {
-    // Have person A and B different events, and person C an event for the whole day.
-    // We should see two options because each person has split the restricted times,
-    // and the optional attendee has no available window.
-    //
-    // Events  : |-----|==A==|--C--|==B==|-----|
-    // Day     : |-----------------------------|
-    // Options : |--1--|     |--2--|     |--3--|
-
+    /**
+     * Have person A and B different events, and person C an event for the whole day.
+     * We should see two options because each person has split the restricted times,
+     * and the optional attendee has no available window.
+     *
+     * Events  : |-----|==A==|--C--|==B==|-----|
+     * Day     : |-----------------------------|
+     * Options : |--1--|     |--2--|     |--3--|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -308,13 +317,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void optionalAttendeeOverlapsOneSlot() {
-    // Have each person have different events. We should see two options because each person has
-    // split the restricted times.
-    //
-    // Events  :       |--A--|--C--|--B--|
-    // Day     : |-----------------------------|
-    // Options : |--1--|                 |--3--|
-
+    /**
+     * Have each person have different events. We should see two options because each person has
+     * split the restricted times.
+     *
+     * Events  :       |--A--|--C--|--B--|
+     * Day     : |-----------------------------|
+     * Options : |--1--|                 |--3--|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
             Arrays.asList(PERSON_A)),
@@ -337,13 +347,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void justEnoughRoomForMandatoryOnly() {
-    // Have one mandatory attendee and one optional, but make it so that there is just enough room
-    // at one point in the day to have the meeting only for the mandatory.
-    //
-    // Events  : |--A--|-B-| |----A----|
-    // Day     : |---------------------|
-    // Options :       |-----|
-
+    /**
+     * Have one mandatory attendee and one optional, but make it so that there is just enough room
+     * at one point in the day to have the meeting only for the mandatory.
+     *
+     * Events  : |--A--|-B-| |----A----|
+     * Day     : |---------------------|
+     * Options :       |-----|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             Arrays.asList(PERSON_A)),
@@ -364,12 +375,13 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void onlyOptionalsAllAvailable() {
-    // Have two optional attendees with several gaps in their schedules.
-    //
-    // Events  : |---A---|  |---B---|     |----A----|
-    // Day     : |----------------------------------|
-    // Options :         |--|       |-----|
-
+    /**
+     * Have two optional attendees with several gaps in their schedules.
+     *
+     * Events  : |---A---|  |---B---|     |----A----|
+     * Day     : |----------------------------------|
+     * Options :         |--|       |-----|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0900AM, false),
             Arrays.asList(PERSON_A)),
@@ -392,13 +404,14 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void onlyOptionalsNoneAvailable() {
-    // Have two optional attendees with no gaps in their schedule. The response must be a full day,
-    // since no optional attendees can participate, and all mandatory(none) can.
-    //
-    // Events  : |---A---|-----B-----|----A----|
-    // Day     : |-----------------------------|
-    // Options : |-----------------------------|
-
+    /**
+     * Have two optional attendees with no gaps in their schedule. The response must be a full day,
+     * since no optional attendees can participate, and all mandatory(none) can.
+     *
+     * Events  : |---A---|-----B-----|----A----|
+     * Day     : |-----------------------------|
+     * Options : |-----------------------------|
+     */
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0900AM, false),
             Arrays.asList(PERSON_A)),
@@ -419,13 +432,15 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void oneOptionalCannotAttend() {
-    // Have two optional attendees, one with no gaps and one that has the same schedule as
-    // a mandatory attendee, plus an additional gap. The result should be the options
-    // for the mandatory attendee only.
-    //
-    // Events  : |---------|~~B~~A~~C~~|==B==|-|
-    // Day     : |-----------------------------|
-    // Options : |---------|           |-------|
+    /**
+     * Have two optional attendees, one with no gaps and one that has the same schedule as
+     * a mandatory attendee, plus an additional gap. The result should be the options
+     * for the mandatory attendee only.
+     * 
+     * Events  : |---------|~~B~~A~~C~~|==B==|-|
+     * Day     : |-----------------------------|
+     * Options : |---------|           |-------|
+     */
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.WHOLE_DAY, Arrays.asList(PERSON_A)),
@@ -448,12 +463,12 @@ public final class FindMeetingQueryTest {
 
   @Test
   public void threeConsecutiveEvents() {
-    // Have only one attendee, but instead of a longer event, they have 3 shorter events
-    // back to back.
-    //
-    // Events  :        |--1--|--3--|--2--|
-    // Day     : |-------------------------------|
-    // Options : |------|                 |------|
+    * Have only one attendee, but instead of a longer event, they have 3 shorter events
+    * back to back.
+    *
+    * Events  :        |--1--|--3--|--2--|
+    * Day     : |-------------------------------|
+    * Options : |------|                 |------|
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_1_HOUR),
