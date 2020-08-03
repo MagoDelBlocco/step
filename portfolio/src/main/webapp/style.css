@@ -78,6 +78,20 @@ input[type=checkbox] {
   display: none;
 }
 
+
+.no-margin {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
+.no-margin-top {
+  margin-block-start: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}
+
 /**
  * Main
  */
@@ -90,7 +104,8 @@ input[type=checkbox] {
 #front-text {
   backdrop-filter: blur(2px);
   bottom: 40%;
-  height: 70px;
+  font-size: 40px;
+  height: 80px;
   left: 0;
   margin: auto;
   position: absolute;
@@ -130,7 +145,7 @@ input[type=checkbox] {
 
 .main-text {
   background: #eee;
-  font: 20px;
+  font-size: 20px;
   height: auto;
   padding: 0 50px 0 50px;
   width: auto;
@@ -139,12 +154,17 @@ input[type=checkbox] {
 .sections {
   background: #777;
   height: 70px;
+  margin: 0;
   position: sticky;
   width: 100%;
 }
 
 .sections h1 {
   font: small-caps bold 30px/1 Arial, Helvetica, sans-serif;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 /**
