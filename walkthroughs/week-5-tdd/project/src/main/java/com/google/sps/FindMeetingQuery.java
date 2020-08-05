@@ -97,32 +97,36 @@ public final class FindMeetingQuery {
     return false;
   }
 
+  /**
+   * Possible cases:
+   * 1. originalTimeTable:  [--------------------------]
+   *    splitter:                     [-----]
+   *    result:             [---------]     [----------]
+   *
+   * 2. originalTimeTable:  [------]   ...   [---------]
+   *    splitter:                [-------------]
+   *    result:             [----]             [-------]
+   *
+   * 3. originalTimeTable:  [------]   ...  [----------]
+   *    splitter:                     [-----]
+   *    result:             [------]        [----------]
+   *
+   * 4. originalTimeTable:  [------]           [-------]
+   *    splitter:                     [-----]
+   *    result:             [------]           [-------]
+   *
+   * Mention: for this method, it will only matter if the splitter is contained or not.
+   */
   private void splitTimeTable(final List<TimeRange> originalTimeTable,
                               final TimeRange timeSplitter) {
-    /**
-     * Possible cases:
-     * 1. originalTimeTable:  [--------------------------]
-     *    splitter:                     [-----]
-     *    result:             [---------]     [----------]
-     *
-     * 2. originalTimeTable:  [------]   ...   [---------]
-     *    splitter:                [-------------]
-     *    result:             [----]             [-------]
-     *
-     * 3. originalTimeTable:  [------]   ...  [----------]
-     *    splitter:                     [-----]
-     *    result:             [------]        [----------]
-     *
-     * 4. originalTimeTable:  [------]           [-------]
-     *    splitter:                     [-----]
-     *    result:             [------]           [-------]
-     *
-     * Mention: for this method, it will only matter if the splitter is contained or not.
-     */
     if (originalTimeTable.isEmpty()) {
       return;
     }
 
+    /**
+     * Find the element with the largest starting point <= the starting point
+     * of @param timeSplitter. This will determine in which case the program is in.
+     */
     int firstRelevantTimeslotIdx = TimeRange.lowerBound(originalTimeTable, timeSplitter);
 
     if (originalTimeTable.get(firstRelevantTimeslotIdx).contains(timeSplitter)) {  // Case 1
@@ -132,10 +136,23 @@ public final class FindMeetingQuery {
     }
   }
 
+  /**
+   * For case 1, there could be 4 variations:
+   * a) The initial slot in split in two non-null distinct time slots
+   * b) The initial slot shares the starting point with the @param splitter, and as such
+   *    it becomes only the slot from @param splitter's end and initial slot's end
+   * c) Same as b), but with the slot becoming the time from initial slot's begin and
+   *    @param splitter's begin.
+   * d) The initial slot is the same as the splitter, and there are no resulting slots.
+   */
   private void splitAtTimeslot(final List<TimeRange> timeTable, final TimeRange splitter,
                                                                 final int splitIdx) {
     TimeRange originalSlot = timeTable.remove(splitIdx);
 
+    /**
+     * Inserting the second slot before the first one, since in subcase a)
+     * they will remain in order because of how {@code add} works.
+     */
     if (originalSlot.end() > splitter.end()) {
       timeTable.add(splitIdx,
                     TimeRange.fromStartEnd(splitter.end(), originalSlot.end(), false));
@@ -156,9 +173,15 @@ public final class FindMeetingQuery {
                                                                        int overlapIdx) {
     TimeRange aux;
 
+    // Checks if it is in case 2.
     if (timeTable.get(overlapIdx).overlaps(overlapper)) {
       aux = timeTable.remove(overlapIdx);
 
+      /** 
+       * No need to call {@code contains}, since it is known that
+       * {@code aux.end > overlapper.start} (aux.start <= overlapper.start and aux overlaps with 
+       * overlapper).
+       */
       if (aux.start() < overlapper.start()) {
         timeTable.add(overlapIdx, TimeRange.fromStartEnd(aux.start(), overlapper.start(), false));
       } else {  // timeTable[overlapIdx] already is the next element
@@ -167,6 +190,7 @@ public final class FindMeetingQuery {
     }
     ++overlapIdx;
 
+    // In case 3, remove any slots contained by @param overlapper.
     for (; overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx));) {
       timeTable.remove(overlapIdx);
     }
@@ -174,6 +198,7 @@ public final class FindMeetingQuery {
     if (overlapIdx < timeTable.size() && timeTable.get(overlapIdx).overlaps(overlapper)) {
       aux = timeTable.remove(overlapIdx);
 
+      // No need for contain check here, since it was already checked in the previous loop.
       timeTable.add(overlapIdx, TimeRange.fromStartEnd(overlapper.end(), aux.end(), false));
     }
   }
