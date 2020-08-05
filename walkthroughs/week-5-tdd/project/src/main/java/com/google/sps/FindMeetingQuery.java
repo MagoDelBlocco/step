@@ -14,18 +14,28 @@
 
 package com.google.sps;
 
-import java.util.List;
+import com.google.sps.TimeRange;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-import com.google.sps.TimeRange;
+import java.util.List;
 
 /**
  * This class exposes the {@code query} method, which finds available time slots
  * for a meeting with a list of mandatory and optional attendees.
  */
 public final class FindMeetingQuery {
+  /**
+   * If @param request is null, returns null.
+   * If @param events is null, considers an empty collection of events.
+   */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+    if (request == null) {
+      returns null;
+    } else if (events == null) {
+      events = LinkedList<>();
+    }
+
     TimeTablePair timeTablePair = registerRelevantEvents(events, request.getAttendees(),
                                                                  request.getOptionalAttendees());
     List<TimeRange> mandatoryTimeTable = timeTablePair.getFirst();
@@ -56,7 +66,7 @@ public final class FindMeetingQuery {
                                                final Collection<String> optionalAttendees) {
     /**
      * The timeTable collection holds TimeRanges which represent empty time slots for
-     * all the people invited
+     * all the people invited.
      */
     List<TimeRange> timeTable = new ArrayList<>();
     List<TimeRange> optionalTimeTable = new ArrayList<>();
@@ -107,11 +117,12 @@ public final class FindMeetingQuery {
      *    splitter:                     [-----]
      *    result:             [------]           [-------]
      *
-     * Mention: for this method, it will only matter if the splitter is contained or not
+     * Mention: for this method, it will only matter if the splitter is contained or not.
      */
     if (originalTimeTable.isEmpty()) {
       return;
     }
+
     int firstRelevantTimeslotIdx = TimeRange.lowerBound(originalTimeTable, timeSplitter);
 
     if (originalTimeTable.get(firstRelevantTimeslotIdx).contains(timeSplitter)) {  // Case 1

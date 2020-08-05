@@ -16,9 +16,9 @@ package com.google.sps;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;

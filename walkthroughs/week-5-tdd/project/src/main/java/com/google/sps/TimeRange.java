@@ -186,10 +186,17 @@ public final class TimeRange {
   }
 
   /**
-   * Uses a branchless binary search to find the first element in a TimeRange @param collection
-   * that potentially overlaps with the @param target
+   * Uses a branchless binary search to find the TimeRange with the biggest starting point,
+   * that is <= to the starting point of @param target. On an empty @param collection,
+   * returns 0. On a null @param collection or @param target, returns -1.
+   * It searches the index of the @param target bit by bit, starting with the MSB and going
+   * down to the LSB of the index.
    */
   public static int lowerBound(final List<TimeRange> collection, final TimeRange target) {
+    if (collection == null || target == null) {
+      return -1;
+    }
+
     int lowerBoundPosition = 0;
 
     for (int pace = maxPossiblePace(collection.size()); pace > 0; pace >>= 1) {
@@ -203,7 +210,7 @@ public final class TimeRange {
   }
 
   /**
-   * Finds the biggest power of 2 closest to the @param length 2 ^ [log_2(n)]
+   * Finds the biggest power of 2 closest to the @param length with the formula 2 ^ [log_2(n)].
    */
   private static int maxPossiblePace(final int length) {
     return (int)Math.pow(2, (int)(Math.log(length) / Math.log(2)));  
