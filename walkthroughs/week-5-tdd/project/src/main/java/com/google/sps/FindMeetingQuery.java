@@ -230,7 +230,7 @@ public final class FindMeetingQuery {
     ++overlapIdx;
 
     // In case 3, remove any slots contained by @param overlapper.
-    while (; overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx));) {
+    while (overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx))) {
       timeTable.remove(overlapIdx);
     }
 
