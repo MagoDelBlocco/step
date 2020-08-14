@@ -198,7 +198,7 @@ public final class TimeRange {
    * that have the same starting point as the target's, returns one of them.
    */
   public static int lowerBound(final List<TimeRange> list, final TimeRange target) {
-    if (collection == null || target == null) {
+    if (list == null || target == null) {
       return -1;
     }
 
