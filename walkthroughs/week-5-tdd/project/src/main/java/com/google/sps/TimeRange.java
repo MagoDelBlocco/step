@@ -202,8 +202,8 @@ public final class TimeRange {
                         throws IllegalArgumentException {
     if (list == null || target == null) {
       throw new IllegalArgumentException("No argument should be null for lowerBound");
-    } else if (list.empty()) {
-      throw new IllegalArgumentException("The list provided is empty")
+    } else if (list.size() == 0) {
+      throw new IllegalArgumentException("The list provided is empty");
     }
 
     int lowerBoundPosition = 0;
