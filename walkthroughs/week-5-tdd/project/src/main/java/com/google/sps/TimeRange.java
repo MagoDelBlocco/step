@@ -190,16 +190,20 @@ public final class TimeRange {
    * that is <= to the starting point of target.
    * It searches the index of the target bit by bit, starting with the MSB and going
    * down to the LSB of the index.
+   *
    * @param list the list of TimeRanges to search from.
    * @param target the TimeRange to be searched
-   * @return if either the list or the target are null, returns -1. If the list
-   * is empty, returns 0. Otherwise, returns the index of the element which has the
-   * closest starting point lower than the target's one. If there are multiple elements
-   * that have the same starting point as the target's, returns one of them.
+   * @return the index of the element which has the closest starting point lower than the target's
+   *    one. If there are multiple elements that have the same starting point as the target's,
+   *    returns one of them.
+   * @throws IllegalArgumentException if either any argument is null, or if the list is empty.
    */
-  public static int lowerBound(final List<TimeRange> list, final TimeRange target) {
+  public static int lowerBound(final List<TimeRange> list, final TimeRange target)
+                        throws IllegalArgumentException {
     if (list == null || target == null) {
-      return -1;
+      throw new IllegalArgumentException("No argument should be null for lowerBound");
+    } else if (list.empty()) {
+      throw new IllegalArgumentException("The list provided is empty")
     }
 
     int lowerBoundPosition = 0;

@@ -28,17 +28,18 @@ public final class FindMeetingQuery {
   /**
    * This method is used to find all available time slots for a meeting,
    * provided a list of mandatory and optional attendees.
+   *
    * @param request provides the Meeting object, along with the attendees list.
    * @param events is the list of all previously scheduled meetings.
-   * @return returns null when the request is null, returns an empty list when
-   * the event list is null, else returns a list of all available time slots for the
-   * meeting.
+   * @return null when the request is null, returns an empty list when
+   *    the event list is null, else returns a list of all available time slots for the
+   *    meeting.
+   * @throws IllegalArgumentException if any of the arguments is null.
    */
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    if (request == null) {
-      return null;
-    } else if (events == null) {
-      events = new LinkedList<>();
+  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request)
+                                   throws IllegalArgumentException {
+    if (request == null || events == null) {
+      throw new IllegalArgumentException("No query argument should be null");
     }
 
     TimeTablePair timeTablePair = registerRelevantEvents(events, request.getAttendees(),
@@ -55,10 +56,11 @@ public final class FindMeetingQuery {
 
   /**
    * This method filters slots that have a timespan less than a given duration
+   *
    * @param timeTable a list of available TimeRanges, regardless of their duration. Cannot be null.
    * @param duration the specified duration of the meeting.
-   * @return a collection of timeranges that can accomodate a meeting
-   * of the specified duration. Can never be null.
+   * @return a collection of timeranges that can accomodate a meeting of the specified duration.
+   *    Can never be null.
    */
   private Collection<TimeRange> searchSuitableSlots(final List<TimeRange> timeTable,
                                                     final long duration) {
@@ -76,11 +78,12 @@ public final class FindMeetingQuery {
   /**
    * This method goes through a list of already scheduled events and creates
    * two timetables of available slots, regardless of their duration.
+   *
    * @param events a collection of all scheduled events.
    * @param mandatoryAttendees a list of mandatory attendees for the event to be scheduled.
    * @param optionalAttendees a list of optional attendees for the event to be scheduled.
    * @return a pair of lists of TimeRanges which represent empty timespans for either
-   * mandatory attendees and optional attendees, or only for mandatory attendees.
+   *    mandatory attendees and optional attendees, or only for mandatory attendees.
    */
   private TimeTablePair registerRelevantEvents(final Collection<Event> events,
                                                final Collection<String> mandatoryAttendees,
@@ -139,9 +142,9 @@ public final class FindMeetingQuery {
    * Mention: for this method, it will only matter if the splitter is contained or not.
    *
    * @param originalTimeTable a list of all previously registered events. When this
-   * method returns, the result is stored in this object. Cannot be null.
+   *    method returns, the result is stored in this object. Cannot be null.
    * @param timeSplitter the TimeRange of the event that is to be registered. Cannot
-   * be null.
+   *    be null.
    */
   private void splitTimeTable(final List<TimeRange> originalTimeTable,
                               final TimeRange timeSplitter) {
@@ -171,10 +174,11 @@ public final class FindMeetingQuery {
    * c) Same as b), but with the slot becoming the time from initial slot's begin and
    *    splitter's begin.
    * d) The initial slot is the same as the splitter, and there are no resulting slots.
+   *
    * @param timeTable a list of all previously registered events. When this
-   * method returns, the result is stored in this object. Cannot be null.
+   *    method returns, the result is stored in this object. Cannot be null.
    * @param splitter the TimeRange that is contained within an element of the timeTable. Cannot be
-   * null.
+   *    null.
    * @param splitIdx the index of the timeTable element which contains the splitter.
    */
   private void splitAtTimeslot(final List<TimeRange> timeTable, final TimeRange splitter,
@@ -201,18 +205,19 @@ public final class FindMeetingQuery {
    * contained inside one of the timeTable's elements, but instead the newly occupied slot may
    * or may not modify the last closest slot that starts before it, contain a number of consecutive
    * slots after it, and may or may not modify the first slot that ends after it. 
+   *
    * @param timeTable a list of all previously registered events. When this
-   * method returns, the result is stored in this object. Cannot be null.
+   *    method returns, the result is stored in this object. Cannot be null.
    * @param overlapper the TimeRange that potentially overlaps with at least one element of the
-   * timeTable. Cannot be null.
+   *    timeTable. Cannot be null.
    * @param overlapIdx the index of the timeTable element that has the starting time closest,
-   * but less than the starting time of the overlapping event.
+   *    but less than the starting time of the overlapping event.
    */
   private void modifyOverlappingSlots(final List<TimeRange> timeTable, final TimeRange overlapper,
                                                                        int overlapIdx) {
     TimeRange aux;
 
-    // Checks if it is in case 2.
+    // Checks if the element at overlapIdx needs to be modified or deleted altogether.
     if (timeTable.get(overlapIdx).overlaps(overlapper)) {
       aux = timeTable.remove(overlapIdx);
 
@@ -223,17 +228,18 @@ public final class FindMeetingQuery {
        */
       if (aux.start() < overlapper.start()) {
         timeTable.add(overlapIdx, TimeRange.fromStartEnd(aux.start(), overlapper.start(), false));
-      } else {  // timeTable[overlapIdx] already is the next element
+      } else {  // timeTable[overlapIdx] already is the next element.
         --overlapIdx;
       }
     }
     ++overlapIdx;
 
-    // In case 3, remove any slots contained by @param overlapper.
+    // Checks if any additional timeslots are contained within the overlapper.
     while (overlapIdx < timeTable.size() && overlapper.contains(timeTable.get(overlapIdx))) {
       timeTable.remove(overlapIdx);
     }
 
+    // Checks the last possible timeslot that could overlap with the overlapper.
     if (overlapIdx < timeTable.size() && timeTable.get(overlapIdx).overlaps(overlapper)) {
       aux = timeTable.remove(overlapIdx);
 
