@@ -188,8 +188,8 @@ public final class TimeRange {
   /**
    * Uses a branchless binary search to find the TimeRange with the biggest starting point,
    * that is <= to the starting point of target.
-   * It searches the index of the target bit by bit, starting with the MSB and going
-   * down to the LSB of the index.
+   * It searches the index of the target bit by bit, starting with the most significant bit and
+   * going down to the least significant bit of the index.
    *
    * @param list the list of TimeRanges to search from.
    * @param target the TimeRange to be searched.
