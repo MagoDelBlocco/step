@@ -48,8 +48,16 @@ async function openModal(target, index) {
   displayComments(comments, document.getElementById('previous-comments'));
 }
 
+function purgeElement(div) {
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+}
+
 function displayComments(comments, commSection) {
   const commentsJSON = eval(comments);
+
+  purgeElement(commSection);
 
   for (let i = 0; i < commentsJSON.length; ++i) {
     const commentHeader = document.createElement('h5');
