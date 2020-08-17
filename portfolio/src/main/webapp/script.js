@@ -49,7 +49,7 @@ async function openModal(target, index) {
 }
 
 function purgeElement(div) {
-  while(div.firstChild) {
+  while (div.firstChild) {
     div.removeChild(div.firstChild);
   }
 }
