@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * This class exposes the {@code query} method, which finds available time slots
- * for a meeting with a list of mandatory and optional attendees.
+ * to accomodate a meeting with a list of mandatory and optional attendees.
  */
 public final class FindMeetingQuery {
   /**
