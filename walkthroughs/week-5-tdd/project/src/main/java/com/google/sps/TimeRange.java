@@ -192,7 +192,7 @@ public final class TimeRange {
    * down to the LSB of the index.
    *
    * @param list the list of TimeRanges to search from.
-   * @param target the TimeRange to be searched
+   * @param target the TimeRange to be searched.
    * @return the index of the element which has the closest starting point lower than the target's
    *    one. If there are multiple elements that have the same starting point as the target's,
    *    returns one of them.

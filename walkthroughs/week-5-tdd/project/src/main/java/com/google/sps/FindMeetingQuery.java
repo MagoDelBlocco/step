@@ -55,7 +55,7 @@ public final class FindMeetingQuery {
   }
 
   /**
-   * This method filters slots that have a timespan less than a given duration
+   * This method filters slots that have a timespan less than a given duration.
    *
    * @param timeTable a list of available TimeRanges, regardless of their duration. Cannot be null.
    * @param duration the specified duration of the meeting.
@@ -168,9 +168,9 @@ public final class FindMeetingQuery {
   /**
    * For the case where a TimeRange is entirely contained inside the TimeRange of an
    * already registered event, there could be 4 variations:
-   * a) The initial slot is split in two non-null distinct time slots
+   * a) The initial slot is split in two non-null distinct time slots.
    * b) The initial slot shares the starting point with the splitter, and as such
-   *    it becomes only the slot from splitter's end and initial slot's end
+   *    it becomes only the slot from splitter's end and initial slot's end.
    * c) Same as b), but with the slot becoming the time from initial slot's begin and
    *    splitter's begin.
    * d) The initial slot is the same as the splitter, and there are no resulting slots.
